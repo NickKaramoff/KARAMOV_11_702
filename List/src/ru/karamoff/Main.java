@@ -24,39 +24,60 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.print("Введите количество элементов: ");
+
                     int n = scanner.nextInt();
+
                     System.out.println();
                     System.out.println("Введите числа в количестве " + n + ":");
+
                     while (array.count < n) {
                         array.appendItem(scanner.nextInt());
                     }
+
                     System.out.println("Массив длиной " + n + " создан.");
                     System.out.println();
                     break;
+
                 case 2:
                     System.out.print("Введите добавляемое число: ");
+
                     array.appendItem(scanner.nextInt());
+
                     System.out.println();
                     break;
+
                 case 3:
                     System.out.print("Введите номер удаляемого элемента (от 1 до " + array.count + "): ");
+
                     array.removeItem(scanner.nextInt() - 1);
+
                     System.out.println();
                     break;
+
                 case 4:
                     System.out.print("Введите номер вставляемого элемента (от 1 до " + array.count + "): ");
+
                     int index = scanner.nextInt() - 1;
+
                     System.out.print("Введите вставляемое число: ");
+
                     int element = scanner.nextInt();
                     array.insertItem(index, element);
+
+                    System.out.println();
                     break;
+
                 case 5:
                     array.printArray();
                     break;
+
                 case 6:
                     System.exit(0);
                     break;
+
                 default:
+                    System.out.println("Пожалуйста, введите номер от 1 до 6.");
+                    System.out.println();
                     break;
             }
         }

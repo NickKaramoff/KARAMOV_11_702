@@ -55,7 +55,7 @@ class ExpandableArray {
             System.err.println("Массив пуст!");
         }
     }
-    
+
     private void expand() {
         int temporaryArray[] = new int[array.length * 2];
         for (int i = 0; i < array.length; i++) {
