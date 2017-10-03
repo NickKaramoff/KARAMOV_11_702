@@ -1,38 +1,101 @@
 package ru.karamoff;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
+
+/**
+ * Класс, описывающий работу парковки с несколькими местами для автомобилей
+ * @author Никита Карамов
+ * @version 1.1
+ * @see Car Класс, описывающий автомобиль
+ */
+
 
 class Parking {
-    private LocalTime openTime = LocalTime.of(8, 0);
-    private LocalTime closeTime = LocalTime.of(23, 0);
 
-    private ArrayList<Car> cars = new ArrayList<>();
+    /** Время открытия парковки */
+    private LocalTime openTime;
+    /** Время закрытия парковки */
+    private LocalTime closeTime;
+    /** Автомобили на парковке */
+    private Car cars[];
+    /** Заполненность парковки */
+    private int fullness = 0;
+    /** Вместимость парковки */
+    private int capacity;
 
-    void takeCar(Car car) {
+    /**
+     * Инициализатор парковки. По умолчанию парковка содержит место на 10 автомобилей и работает с 8 до 23.
+     */
+    public Parking() {
+        openTime = LocalTime.of(8, 0);
+        closeTime =  LocalTime.of(23, 0);
+        capacity = 10;
+        cars = new Car[capacity];
+    }
+
+    /**
+     * Инициализатор парковки с параметрами
+     * @param openTime Время открытия
+     * @param closeTime Время закрытия
+     * @param capacity Вместимость
+     */
+    public Parking(LocalTime openTime, LocalTime closeTime, int capacity) {
+        this.openTime = openTime;
+        this.closeTime = closeTime;
+        this.capacity = capacity;
+        cars = new Car[capacity];
+    }
+
+    /**
+     * Функция постановки автомобиля на парковку. Запускается методом {@link Car#park()}
+     * @param car Автомобиль, что ставят на парковку
+     */
+    public void takeCar(Car car) {
         if (LocalTime.now().isAfter(openTime) && LocalTime.now().isBefore(closeTime)) {
-            cars.add(car);
+            if (fullness < cars.length) {
+                int i = 0;
+                while (cars[i] != null) {
+                    i++;
+                }
+                cars[i] = car;
+                car.setPlace(i);
+                fullness++;
+            } else {
+                System.err.println("На парковке нет места!");
+            }
+
         } else {
-            System.err.println("Парковка работает с 8 до 23!");
+            System.err.println("Парковка работает с " + openTime.getHour() + " до " + closeTime.getHour() + "!");
         }
     }
 
-    void releaseCar(Car car) {
+    /**
+     * Функция снятия автомобиля с парковки. Запускается методом {@link Car#unpark()}
+     * @param car Автомобиль, снимаемый с парковки
+     * @param place Место автомобиля на парковке
+     */
+    public void releaseCar(Car car, int place) {
         if (LocalTime.now().isAfter(openTime) && LocalTime.now().isBefore(closeTime)) {
-            cars.remove(car);
+            cars[place] = null;
+            car.setPlace(-1);
+            fullness--;
         } else {
-            System.err.println("Парковка работает с 8 до 23!");
+            System.err.println("Парковка работает с " + openTime.getHour() + " до " + closeTime.getHour() + "!");
         }
     }
 
-    void listCars() {
-        System.out.println("Припаркованы:");
-        for (Car car : cars) {
-            System.out.println(car.getNumber() + " | " + car.getColor() + " " + car.getBrand());
-        }
+    /**
+     * @return Количество машин, поставленных на парковку
+     */
+    public int getFullness() {
+        return fullness;
     }
 
-    int getFullness() {
-        return cars.size();
+
+    /**
+     * @return Общая вместимость парковки
+     */
+    public int getCapacity() {
+        return capacity;
     }
 }

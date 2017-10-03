@@ -1,22 +1,39 @@
 package ru.karamoff;
 
+/**
+ * Класс, описывающий автомобиль
+ * @author Никита Карамов
+ * @version 1.1
+ * @see Parking Класс, описывающий работу парковки
+ */
+
 public class Car {
     private String brand, color, number;
     private int power; // мощность в л.с.
-
     private int mileage = 0; // пробег в километрах
-
+    /** Привязанная парковка */
     private Parking parking;
+    /** Место на привязанной парковке. Присваивается методами {@link Parking#takeCar(Car)} и {@link Parking#releaseCar(Car, int)} */
+    private int place = -1;
 
-    public Car() {
-
-    }
-
+    /**
+     * Инициализирует автомобиль с базовыми параметрами
+     * @param brand Модель автомобиля
+     * @param power Мощность автомобиля (в л. с.)
+     */
     public Car(String brand, int power) {
         this.brand = brand;
         this.power = power;
     }
 
+    /**
+     * Инициализирует автомобиль с полным набором параметров
+     * @param brand Модель автомобиля
+     * @param number Рег. номер автомобиля
+     * @param power Мощность автомобиля (в л. с.)
+     * @param color Цвет автомобиля
+     * @param parking Парковка, привязанная к автомобилю
+     */
     public Car(String brand, String number, int power, String color, Parking parking) {
         this.brand = brand;
         this.number = number;
@@ -25,7 +42,12 @@ public class Car {
         this.parking = parking;
     }
 
-    void drive(int distance) {
+
+    /**
+     * Метод, увеличивающий пробег автомобиля
+     * @param distance Дистанция, пройденная автомобилем
+     */
+    public void drive(int distance) {
         if (distance >= 0) {
             mileage += distance;
         } else {
@@ -33,6 +55,24 @@ public class Car {
         }
     }
 
+    /**
+     * Метод, ставящий автомобиль на парковку. Запускает {@link Parking#takeCar(Car)}
+     */
+    public void park() {
+        parking.takeCar(this);
+    }
+
+    /**
+     * Метод, убирающий автомобиль с парковки. Запускает {@link Parking#releaseCar(Car, int)}
+     */
+    public void unpark() {
+        parking.releaseCar(this, place);
+    }
+
+
+    /**
+     * @return Модель автомобиля
+     */
     public String getBrand() {
         return brand;
     }
@@ -41,6 +81,10 @@ public class Car {
         this.brand = brand;
     }
 
+
+    /**
+     * @return Цвет автомобиля
+     */
     public String getColor() {
         return color;
     }
@@ -49,6 +93,10 @@ public class Car {
         this.color = color;
     }
 
+
+    /**
+     * @return Рег. номер автомобиля
+     */
     public String getNumber() {
         return number;
     }
@@ -57,6 +105,10 @@ public class Car {
         this.number = number;
     }
 
+
+    /**
+     * @return Мощность автомобиля
+     */
     public int getPower() {
         return power;
     }
@@ -72,10 +124,18 @@ public class Car {
         }
     }
 
+
+    /**
+     * @return Пробег автомобиля
+     */
     public int getMileage() {
         return mileage;
     }
 
+
+    /**
+     * @return Привязанная к автомобилю парковка
+     */
     public Parking getParking() {
         return parking;
     }
@@ -84,11 +144,14 @@ public class Car {
         this.parking = parking;
     }
 
-    public void park() {
-        parking.takeCar(this);
+    /**
+     * @return Место автомобиля на парковке
+     */
+    public int getPlace() {
+        return place;
     }
 
-    public void unpark() {
-        parking.releaseCar(this);
+    public void setPlace(int place) {
+        this.place = place;
     }
 }
