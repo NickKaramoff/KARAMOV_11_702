@@ -25,7 +25,8 @@ public class Main {
             System.out.println("6. Отобразить все машины");
             System.out.println("7. Припарковать машину");
             System.out.println("8. Снять машину с парковки");
-            System.out.println("9. Выход");
+            System.out.println("9. Переприсвоить парковку машине");
+            System.out.println("0. Выход");
             System.out.print("Выберите пункт меню: ");
 
             int choice = scanner.nextInt();
@@ -86,10 +87,19 @@ public class Main {
                     cars.get(scanner.nextInt() - 1).unpark();
                     break;
                 case 9:
+                    System.out.print("Введите номер машины: ");
+                    int carNumber = scanner.nextInt();
+                    if (cars.get(carNumber).isParked()) {
+                        cars.get(carNumber).unpark();
+                    }
+                    System.out.print("Введите номер новой парковки: ");
+                    cars.get(carNumber).setParking(parkings.get(scanner.nextInt()));
+                    break;
+                case 0:
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Введите число от 1 до 9!");
+                    System.out.println("Введите однозначное число!");
                     break;
             }
             System.out.println();

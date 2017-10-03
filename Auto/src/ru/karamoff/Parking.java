@@ -52,18 +52,21 @@ class Parking {
      */
     public void takeCar(Car car) {
         if (LocalTime.now().isAfter(openTime) && LocalTime.now().isBefore(closeTime)) {
-            if (fullness < cars.length) {
-                int i = 0;
-                while (cars[i] != null) {
-                    i++;
+            if(!car.isParked()) {
+                if (fullness < cars.length) {
+                    int i = 0;
+                    while (cars[i] != null) {
+                        i++;
+                    }
+                    cars[i] = car;
+                    car.setPlace(i);
+                    fullness++;
+                } else {
+                    System.err.println("На парковке нет места!");
                 }
-                cars[i] = car;
-                car.setPlace(i);
-                fullness++;
             } else {
-                System.err.println("На парковке нет места!");
+                System.err.println("Машина уже припаркована!");
             }
-
         } else {
             System.err.println("Парковка работает с " + openTime.getHour() + " до " + closeTime.getHour() + "!");
         }
@@ -76,9 +79,13 @@ class Parking {
      */
     public void releaseCar(Car car, int place) {
         if (LocalTime.now().isAfter(openTime) && LocalTime.now().isBefore(closeTime)) {
-            cars[place] = null;
-            car.setPlace(-1);
-            fullness--;
+            if(car.isParked()) {
+                cars[place] = null;
+                car.setPlace(-1);
+                fullness--;
+            } else {
+                System.err.println("Машина не припаркована!");
+            }
         } else {
             System.err.println("Парковка работает с " + openTime.getHour() + " до " + closeTime.getHour() + "!");
         }

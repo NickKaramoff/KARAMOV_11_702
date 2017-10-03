@@ -69,6 +69,10 @@ public class Car {
         parking.releaseCar(this, place);
     }
 
+    public boolean isParked(){
+        return place != -1;
+    }
+
 
     /**
      * @return Модель автомобиля
