@@ -75,7 +75,7 @@ public class Main {
                     break;
                 case 6:
                     for (int i = 0; i < cars.size(); i++) {
-                        System.out.println((i + 1) + ". " + cars.get(i).getColor() + " " + cars.get(i).getBrand() + ", " + cars.get(i).getPower() + " л. с., " + cars.get(i).getNumber() + ", парковка №" + (parkings.indexOf(cars.get(i).getParking()) + 1) + (cars.get(i).getPlace()!= -1 ? "" : (", место " + (cars.get(i).getPlace()+1))));
+                        System.out.println((i + 1) + ". " + cars.get(i).getColor() + " " + cars.get(i).getBrand() + ", " + cars.get(i).getPower() + " л. с., " + cars.get(i).getNumber() + ", парковка №" + (parkings.indexOf(cars.get(i).getParking()) + 1) + (cars.get(i).isParked() ? (", место " + (cars.get(i).getPlace()+1)) : ""));
                     }
                     break;
                 case 7:
