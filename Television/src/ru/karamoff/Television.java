@@ -31,7 +31,7 @@ public class Television {
     public void runningNow(String channelName) {
         for (Channel c : channelSet) {
             if (c.getChannelName().equals(channelName)) {
-                for (Show s : c.getShowSet()) {
+                for (Channel.Show s : c.getShowSet()) {
                     if (s.getStartTime().isAfter(LocalTime.now()) && s.getEndTime().isBefore(LocalTime.now())) {
                         System.out.println("На канале " + c.getChannelName() + " идёт " + s.getShowName());
                         System.out.println("С " + s.getStartTime().getHour() + ":" + s.getStartTime().getMinute() + "до" + s.getEndTime().getHour() + ":" + s.getEndTime().getMinute());

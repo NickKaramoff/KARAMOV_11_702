@@ -8,11 +8,19 @@ public class Remote {
     private LocalDate lifetime;
 
     public void switchTo(String channelName) {
-        attachedTelevision.runningNow(channelName);
+        if (isValid()) {
+            attachedTelevision.runningNow(channelName);
+        } else {
+            System.err.println("Пульт не работает!");
+        }
     }
 
     public void scheduleOf(String channelName) {
-        attachedTelevision.displaySchedule(channelName);
+        if (isValid()) {
+            attachedTelevision.displaySchedule(channelName);
+        } else {
+            System.err.println("Пульт не работает!");
+        }
     }
 
     public Remote(Builder builder) {
@@ -93,5 +101,9 @@ public class Remote {
 
     public LocalDate getLifetime() {
         return lifetime;
+    }
+
+    public boolean isValid() {
+        return lifetime.isAfter(LocalDate.now());
     }
 }
