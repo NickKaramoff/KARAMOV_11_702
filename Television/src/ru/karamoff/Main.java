@@ -86,14 +86,14 @@ public class Main {
         }; // создание каналов и передач
 
         Television television = Television.getTelevision(channelSet);
-        System.out.println("Введите, разделяя пробелом: название, серийный номер, марку, производителя, год срока службы, месяц срока службы, день срока службы пульта");
+//        System.out.println("Введите, разделяя пробелом: название, серийный номер, марку, производителя, год срока службы, месяц срока службы, день срока службы пульта");
         Remote remote = Remote.builder()
                 .attachedTelevision(television)
-                .remoteName(scanner.next())
-                .serialNumber(scanner.next())
-                .brandName(scanner.next())
-                .manufacturer(scanner.next())
-                .lifetime(LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt()))
+//                .remoteName(scanner.next())
+//                .serialNumber(scanner.next())
+//                .brandName(scanner.next())
+//                .manufacturer(scanner.next())
+//                .lifetime(LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt()))
                 .build();
 
         while (true) {

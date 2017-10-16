@@ -29,7 +29,7 @@ public class Channel {
 
     public void printShowSet() {
         for (Show s : showSet) {
-            System.out.println(s.getStartTime().getHour() + ":" + s.getStartTime().getMinute() + " " + s.getShowName());
+            System.out.println(s.getStartTime().getHour() + ":" + (s.getStartTime().getMinute() < 10 && s.getStartTime().getMinute() >= 0 ? ("0" + s.getStartTime().getMinute()) : s.getStartTime().getMinute()) + " " + s.getShowName());
         }
     }
 

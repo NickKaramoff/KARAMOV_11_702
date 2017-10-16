@@ -103,6 +103,30 @@ public class Remote {
         return lifetime;
     }
 
+    public void setAttachedTelevision(Television attachedTelevision) {
+        this.attachedTelevision = attachedTelevision;
+    }
+
+    public void setRemoteName(String remoteName) {
+        this.remoteName = remoteName;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setLifetime(LocalDate lifetime) {
+        this.lifetime = lifetime;
+    }
+
     public boolean isValid() {
         return lifetime.isAfter(LocalDate.now());
     }
