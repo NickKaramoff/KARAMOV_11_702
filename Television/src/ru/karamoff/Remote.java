@@ -3,25 +3,10 @@ package ru.karamoff;
 import java.time.LocalDate;
 
 public class Remote {
+
     private Television attachedTelevision;
     private String remoteName, serialNumber, brandName, manufacturer;
     private LocalDate lifetime;
-
-    public void switchTo(String channelName) {
-        if (isValid()) {
-            attachedTelevision.runningNow(channelName);
-        } else {
-            System.err.println("Пульт не работает!");
-        }
-    }
-
-    public void scheduleOf(String channelName) {
-        if (isValid()) {
-            attachedTelevision.displaySchedule(channelName);
-        } else {
-            System.err.println("Пульт не работает!");
-        }
-    }
 
     public Remote(Builder builder) {
         this.attachedTelevision = builder.attachedTelevision;
@@ -79,55 +64,73 @@ public class Remote {
         }
     }
 
+
+    public void switchTo(String channelName) {
+        if (isValid()) {
+            attachedTelevision.runningNow(channelName);
+        } else {
+            System.err.println("Пульт не работает!");
+        }
+    }
+
+    public void scheduleOf(String channelName) {
+        if (isValid()) {
+            attachedTelevision.displaySchedule(channelName);
+        } else {
+            System.err.println("Пульт не работает!");
+        }
+    }
+
+    public boolean isValid() {
+        return lifetime.isAfter(LocalDate.now());
+    }
+
+
     public Television getAttachedTelevision() {
         return attachedTelevision;
-    }
-
-    public String getRemoteName() {
-        return remoteName;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public LocalDate getLifetime() {
-        return lifetime;
     }
 
     public void setAttachedTelevision(Television attachedTelevision) {
         this.attachedTelevision = attachedTelevision;
     }
 
+    public String getRemoteName() {
+        return remoteName;
+    }
+
     public void setRemoteName(String remoteName) {
         this.remoteName = remoteName;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
     }
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 
+    public String getBrandName() {
+        return brandName;
+    }
+
     public void setBrandName(String brandName) {
         this.brandName = brandName;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
     }
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
-    public void setLifetime(LocalDate lifetime) {
-        this.lifetime = lifetime;
+    public LocalDate getLifetime() {
+        return lifetime;
     }
 
-    public boolean isValid() {
-        return lifetime.isAfter(LocalDate.now());
+    public void setLifetime(LocalDate lifetime) {
+        this.lifetime = lifetime;
     }
 }

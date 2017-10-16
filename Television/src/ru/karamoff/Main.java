@@ -1,6 +1,6 @@
 package ru.karamoff;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
@@ -82,7 +82,6 @@ public class Main {
                 new Channel(showSet8, "Дисней"),
                 new Channel(showSet9, "ТВ1000"),
                 new Channel(showSet10, "Евроньюс")
-
         }; // создание каналов и передач
 
         Television television = Television.getTelevision(channelSet);
@@ -110,10 +109,12 @@ public class Main {
                     television.printChannelSet();
                     break;
                 case 2:
+                    System.out.println("Введите название канала");
                     String channelToSwitch = scanner.next();
                     remote.switchTo(channelToSwitch);
                     break;
                 case 3:
+                    System.out.println("Введите название канала");
                     String channelToDisplaySchedule = scanner.next();
                     remote.scheduleOf(channelToDisplaySchedule);
                     break;

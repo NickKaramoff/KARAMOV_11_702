@@ -3,6 +3,7 @@ package ru.karamoff;
 import java.time.LocalTime;
 
 public class Television {
+
     private Channel channelSet[];
 
     private static final Television instance;
@@ -20,6 +21,7 @@ public class Television {
         return instance;
     }
 
+
     public void setChannelSet(Channel[] channelSet) {
         this.channelSet = channelSet;
     }
@@ -27,6 +29,7 @@ public class Television {
     public Channel[] getChannelSet() {
         return channelSet;
     }
+
 
     public void printChannelSet() {
         for (int i = 0; i < channelSet.length; i++) {
@@ -47,15 +50,14 @@ public class Television {
                 }
             }
         }
+        System.out.println();
     }
 
     public void displaySchedule(String channelName) {
         for (Channel c : channelSet) {
             if (c.getChannelName().equals(channelName)) {
                 c.printShowSet();
-                System.out.println();
             }
         }
-        System.out.println();
     }
 }

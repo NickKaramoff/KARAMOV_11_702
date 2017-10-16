@@ -3,6 +3,7 @@ package ru.karamoff;
 import java.time.LocalTime;
 
 public class Channel {
+
     private Show showSet[];
     private String channelName;
 
@@ -10,6 +11,15 @@ public class Channel {
         this.showSet = showSet;
         this.channelName = channelName;
     }
+
+
+    public void printShowSet() {
+        for (Show s : showSet) {
+            System.out.println(s.getStartTime().getHour() + ":" + (s.getStartTime().getMinute() < 10 && s.getStartTime().getMinute() >= 0 ? ("0" + s.getStartTime().getMinute()) : s.getStartTime().getMinute()) + " " + s.getShowName());
+        }
+        System.out.println();
+    }
+
 
     public Show[] getShowSet() {
         return showSet;
@@ -27,11 +37,6 @@ public class Channel {
         this.channelName = channelName;
     }
 
-    public void printShowSet() {
-        for (Show s : showSet) {
-            System.out.println(s.getStartTime().getHour() + ":" + (s.getStartTime().getMinute() < 10 && s.getStartTime().getMinute() >= 0 ? ("0" + s.getStartTime().getMinute()) : s.getStartTime().getMinute()) + " " + s.getShowName());
-        }
-    }
 
     static class Show {
         private LocalTime startTime, endTime;
