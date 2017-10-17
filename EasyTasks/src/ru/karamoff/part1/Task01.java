@@ -1,4 +1,4 @@
-package ru.karamoff;
+package ru.karamoff.part1;
 
 import java.util.Scanner;
 

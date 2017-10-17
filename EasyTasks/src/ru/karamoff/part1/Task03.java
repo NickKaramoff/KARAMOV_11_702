@@ -1,4 +1,4 @@
-package ru.karamoff;
+package ru.karamoff.part1;
 
 import java.util.Scanner;
 
@@ -15,11 +15,6 @@ public class Task03 {
         int letter2 = coordinates2.charAt(0) - 'a' + 1;
         int number2 = coordinates2.charAt(1) - '0';
 
-        if (Math.abs(letter2-letter1)==2 && Math.abs(number2-number1)==1 ||
-                Math.abs(letter2-letter1)==1 && Math.abs(number2-number1)==2) {
-            System.out.println("YES");
-        } else {
-            System.out.println("NO");
-        }
+        System.out.println(Math.abs(letter2 - letter1) == 2 && Math.abs(number2 - number1) == 1 || Math.abs(letter2 - letter1) == 1 && Math.abs(number2 - number1) == 2 ? "YES" : "NO");
     }
 }
