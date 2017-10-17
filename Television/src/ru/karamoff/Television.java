@@ -16,7 +16,7 @@ public class Television {
         instance = new Television();
     }
 
-    public static Television getTelevision(Channel channels[]) {
+    public static Television getInstance(Channel channels[]) {
         instance.setChannelSet(channels);
         return instance;
     }

@@ -25,7 +25,7 @@ public class Channel {
         return showSet;
     }
 
-    public void setShowSet(Show[] showSet) {
+    public void setShowSet(Show showSet[]) {
         this.showSet = showSet;
     }
 

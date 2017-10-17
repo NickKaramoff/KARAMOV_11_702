@@ -84,7 +84,7 @@ public class Main {
                 new Channel(showSet10, "Евроньюс")
         }; // создание каналов и передач
 
-        Television television = Television.getTelevision(channelSet);
+        Television television = Television.getInstance(channelSet);
 //        System.out.println("Введите, разделяя пробелом: название, серийный номер, марку, производителя, год срока службы, месяц срока службы, день срока службы пульта");
         Remote remote = Remote.builder()
                 .attachedTelevision(television)
