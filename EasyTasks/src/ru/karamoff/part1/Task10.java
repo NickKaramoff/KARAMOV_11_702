@@ -15,10 +15,10 @@ public class Task10 {
             int d = b * b - 4 * a * c;
             if (d > 0) {
                 System.out.println("Два действительных корня:");
-                double x_1 = (-b + Math.sqrt(d)) / (2 * a);
-                double x_2 = (-b - Math.sqrt(d)) / (2 * a);
-                System.out.println(x_1);
-                System.out.println(x_2);
+                double x1 = (-b + Math.sqrt(d)) / (2 * a);
+                double x2 = (-b - Math.sqrt(d)) / (2 * a);
+                System.out.println(x1);
+                System.out.println(x2);
             } else if (d == 0) {
                 System.out.println("Один действительный корень:");
                 double x = (-b) / (2 * a);

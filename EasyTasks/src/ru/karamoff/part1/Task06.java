@@ -13,7 +13,7 @@ public class Task06 {
         System.out.println(year % 4 == 0 && year % 100 != 0 || year % 400 == 0 ? "12/10/" + toFour(year) : "13/10/" + toFour(year));
     }
 
-    static String toFour(int year) {
+    private static String toFour(int year) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(year);
 

@@ -6,16 +6,16 @@ public class Task08 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        double x_1 = scanner.nextDouble();
-        double y_1 = scanner.nextDouble();
-        double r_1 = scanner.nextDouble();
+        double x1 = scanner.nextDouble();
+        double y1 = scanner.nextDouble();
+        double r1 = scanner.nextDouble();
 
-        double x_2 = scanner.nextDouble();
-        double y_2 = scanner.nextDouble();
-        double r_2 = scanner.nextDouble();
+        double x2 = scanner.nextDouble();
+        double y2 = scanner.nextDouble();
+        double r2 = scanner.nextDouble();
 
-        double distance = Math.sqrt((x_2 - x_1) * (x_2 - x_1) + (y_2 - y_1) * (y_2 - y_1));
+        double distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 
-        System.out.println(distance < r_1 + r_2 ? "YES" : "NO");
+        System.out.println(distance < r1 + r2 ? "YES" : "NO");
     }
 }
