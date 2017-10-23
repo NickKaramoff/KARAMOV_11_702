@@ -13,6 +13,11 @@ public class Task06 {
         System.out.println(year % 4 == 0 && year % 100 != 0 || year % 400 == 0 ? "12/10/" + toFour(year) : "13/10/" + toFour(year));
     }
 
+    /**
+     * Outputs year in 4-digit format. Puts zero in front of years less than 1000
+     * @param year year in form of an integer
+     * @return Returns a string containing year in 4-digit format
+     */
     private static String toFour(int year) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(year);

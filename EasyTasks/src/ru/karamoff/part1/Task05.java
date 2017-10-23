@@ -15,9 +15,9 @@ public class Task05 {
         int letter2 = coordinates2.charAt(0) - 'a' + 1;
         int number2 = coordinates2.charAt(1) - '0';
 
-        if (letter1 + number1 == letter2 + number2) {
+        if (letter1 + number1 == letter2 + number2 || letter1-number1 == letter2-number2) {
             System.out.println("SAME");
-        } else if (Math.abs(letter1 + number1 - (letter2 + number2)) == 1) {
+        } else if (Math.abs(letter1 + number1 - (letter2 + number2)) == 1 || Math.abs(letter1 - number1 - (letter2 - number2)) == 1) {
             System.out.println("NEIGHBOUR");
         }
     }

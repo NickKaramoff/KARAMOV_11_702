@@ -6,13 +6,21 @@ public class Task20 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int number1 = scanner.nextInt();
-        int number2 = scanner.nextInt();
+        String number1 = scanner.next();
+        String number2 = scanner.next();
 
+        if (number1.length() == 6 && number2.length() == 6) {
 
-        System.out.println(
-                (number1 % 10 + number2 % 10) % 10 + (number1 / 10 % 10 + number2 / 10 % 10) % 10 + (number1 / 100 % 10 + number2 / 100 % 10) % 10 == (number1 / 100000 + number2 / 100000) % 10 + (number1 / 10000 % 10 + number2 / 10000 % 10) % 10 + (number1 / 1000 % 10 + number2 / 1000 % 10) % 10
-                        ? "YES" : "NO"
-        );
+            int[] number = new int[6];
+            for (int i = 0; i < 6; i++) {
+                number[i] = ((number1.charAt(i) - '0') + (number2.charAt(i) - '0')) % 10;
+            }
+
+            System.out.println(
+                    number[0] + number[1] + number[2] == number[3] + number[4] + number[5] ? "YES" : "NO"
+            );
+        } else {
+            System.err.println("Введите два шестизначных числа");
+        }
     }
 }

@@ -6,10 +6,20 @@ public class Task13 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int number = scanner.nextInt();
+        String number = scanner.next();
 
-        System.out.println(
-                (number % 10 == number / 100000) && (number / 10 % 10 == number / 10000 % 10) && (number / 100 % 10 == number / 1000 % 10) ? "YES" : "NO"
-        );
+        if (number.length() == 6) {
+            int[] numbers = new int[6];
+
+            for (int i = 0; i < 6; i++) {
+                numbers[i] = number.charAt(i) - '0';
+            }
+
+            System.out.println(
+                    numbers[5] == numbers[0] && numbers[4] == numbers[1] && numbers[3] == numbers[2] ? "YES" : "NO"
+            );
+        } else {
+            System.err.println("Введите шестизначное число!");
+        }
     }
 }
