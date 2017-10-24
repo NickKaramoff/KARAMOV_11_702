@@ -23,6 +23,11 @@ public class Task12 {
         double d2 = scanner.nextDouble();
         double d3 = scanner.nextDouble();
 
+
+        // FIXME всё неправильно начиная с этой строки, выдаёт неправильный результат, мда
+
+
+
         double a = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)); // длина (1)(2)
         double b = Math.sqrt((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2)); // длина (2)(3)
 

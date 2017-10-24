@@ -9,6 +9,8 @@ public class Task19 {
         String number1 = scanner.next();
         String number2 = scanner.next();
 
+        // TODO сделать флексибл для чисел разного размера
+
         if (number1.length() == 4 && number2.length() == 4) {
 
             int[] numbers1 = new int[4];
