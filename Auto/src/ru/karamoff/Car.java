@@ -8,7 +8,7 @@ public class Car extends Vehicle {
         this.hasSpareWheel = hasSpareWheel;
     }
 
-    public boolean isHasSpareWheel() {
+    public boolean hasSpareWheel() {
         return hasSpareWheel;
     }
 }

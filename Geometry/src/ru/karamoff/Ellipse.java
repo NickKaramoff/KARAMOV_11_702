@@ -1,6 +1,6 @@
 package ru.karamoff;
 
-public class Ellipse extends Shape{
+public class Ellipse extends Shape {
     private double radius1, radius2;
 
     public Ellipse(double radius1, double radius2) {
