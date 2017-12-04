@@ -16,7 +16,7 @@ public class Main {
             String s = reader.readLine(); // считывание строки
 
             while (s != null) {
-                String[] splitString = s.split(" "); // деление на x и y
+                String[] splitString = s.split("\\s+"); // деление на x и y, учитываются возможные лишние пробелы
                 double x = Double.parseDouble(splitString[0]);
                 double y = Double.parseDouble(splitString[1]);
                 points.add(new Point(x, y));
