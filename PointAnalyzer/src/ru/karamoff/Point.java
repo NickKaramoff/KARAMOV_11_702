@@ -1,13 +1,11 @@
 package ru.karamoff;
 
-public class Point implements Comparable<Point> {
+public class Point implements Comparable<Point> { // использует интерфейс для сравнения
     private double x, y;
-    private double tan;
 
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
-//        this.tan = (x != 0) ? (this.y / this.x) : Double.MAX_VALUE;
     }
 
     public Point() {
@@ -23,16 +21,13 @@ public class Point implements Comparable<Point> {
         return y;
     }
 
-//    public double getTan() {
-//        return Math.atan((this.y / this.x));
-//    }
-
+    // метод, сравнивающий x рассматриваемой точки с x другой точки
     @Override
     public int compareTo(Point o) {
-
         return Double.compare(this.x, o.x);
     }
 
+    // выводит точку в формате (x; y)
     @Override
     public String toString() {
         return "(" + x + "; " + y + ")";

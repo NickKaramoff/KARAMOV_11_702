@@ -8,46 +8,46 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Point> points = new ArrayList<>();
-        ArrayList<Line> lines = new ArrayList<>();
+        ArrayList<Point> points = new ArrayList<>();// коллекция всех точек из документа
+        ArrayList<Line> lines = new ArrayList<>();  // коллекция всех полученных линий
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("points.txt"));
-            String s;
-            while ((s = reader.readLine()) != null) {
-                String[] splitString = s.split(" ");
+            String s = reader.readLine(); // считывание строки
+
+            while (s != null) {
+                String[] splitString = s.split(" "); // деление на x и y
                 double x = Double.parseDouble(splitString[0]);
                 double y = Double.parseDouble(splitString[1]);
                 points.add(new Point(x, y));
+                s = reader.readLine();
             }
+
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Collections.sort(points);
+        Collections.sort(points); // сортировка: O(n*logn)
 
         while (points.size() > 0) {
             int i = 0;
-            Point startPoint = new Point();
-            ArrayList<Point> linePoints = new ArrayList<>();
+            Point startPoint = new Point();                     // начальная точка - (0;0)
+            ArrayList<Point> linePoints = new ArrayList<>();    // коллекция точек будущей линии
 
             do {
                 if (points.get(i).getX() >= startPoint.getX() &&
                         points.get(i).getY() >= startPoint.getY()) {
-
-                    startPoint = points.get(i);
-
-                    linePoints.add(startPoint);
-
-                    points.remove(i);
-                    i--;
+                    startPoint = points.get(i); // новая точка становится начальной
+                    linePoints.add(startPoint); // новая точка добавляется в линию
+                    points.remove(i);           // новая точка удаляется из коллекции всех точек
+                    i--;                        // счётчик уменьшается, чтобы учесть удаление точки
                 }
                 i++;
             } while (i < points.size());
 
-            lines.add(new Line(linePoints.toArray(new Point[linePoints.size()])));
-        }
+            lines.add(new Line(linePoints.toArray(new Point[linePoints.size()]))); // добавление линии в коллекцию
+        } // поиск линий: O(n^2)
 
         for (Line l :
                 lines) {

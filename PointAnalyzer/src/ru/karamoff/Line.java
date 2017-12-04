@@ -1,7 +1,5 @@
 package ru.karamoff;
 
-import java.util.Arrays;
-
 public class Line {
     private Point[] points;
 
@@ -9,10 +7,15 @@ public class Line {
         this.points = points;
     }
 
+    public int getLineLength() {
+        return points.length;
+    }
+
+    // выводит линию в виде последовательности точек
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Point p : points){
+        for (Point p : points) {
             stringBuilder.append(p.toString()).append("\n");
         }
         return stringBuilder.toString();
