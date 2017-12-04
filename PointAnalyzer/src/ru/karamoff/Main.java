@@ -8,8 +8,8 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Point> points = new ArrayList<>();// коллекция всех точек из документа
-        ArrayList<Line> lines = new ArrayList<>();  // коллекция всех полученных линий
+        ArrayList<Point> points = new ArrayList<>();    // коллекция всех точек из документа
+        ArrayList<Line> lines = new ArrayList<>();      // коллекция всех полученных линий
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("points.txt"));
@@ -30,6 +30,7 @@ public class Main {
 
         Collections.sort(points); // сортировка: O(n*logn)
 
+        // поиск линий: O(n^2)
         while (points.size() > 0) {
             int i = 0;
             Point startPoint = new Point();                     // начальная точка - (0;0)
@@ -47,7 +48,7 @@ public class Main {
             } while (i < points.size());
 
             lines.add(new Line(linePoints.toArray(new Point[linePoints.size()]))); // добавление линии в коллекцию
-        } // поиск линий: O(n^2)
+        }
 
         for (Line l :
                 lines) {
