@@ -42,15 +42,24 @@ public class Main extends Application {
         }
 
         Collections.sort(points);
+        Collections.reverse(points);
+
+        double maxX = points.get(points.size()-1).getX();
+        double maxY = 0;
+
+        for (Point point : points) {
+            if (point.getY() > maxY) {
+                maxY = point.getY();
+            }
+        }
 
         while (points.size() > 0) {
             int i = 0;
-            Point startPoint = new Point();                     // начальная точка - (0;0)
+            Point startPoint = new Point(maxX, maxY);           // начальная точка - (0;0)
             ArrayList<Point> linePoints = new ArrayList<>();    // коллекция точек будущей линии
 
             do {
-                if (points.get(i).getX() >= startPoint.getX() &&
-                        points.get(i).getY() >= startPoint.getY()) {
+                if (points.get(i).getY() <= startPoint.getY()) {
                     startPoint = points.get(i); // новая точка становится начальной
                     linePoints.add(startPoint); // новая точка добавляется в линию
                     points.remove(i);           // новая точка удаляется из коллекции всех точек
@@ -62,12 +71,13 @@ public class Main extends Application {
             lines.add(new Line(linePoints.toArray(new Point[linePoints.size()]))); // добавление линии в коллекцию
         }
 
+
         Pane root = new Pane();
 
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         GraphicsContext context = canvas.getGraphicsContext2D();
 
-        double scale = calculateScale(11.9, 7.8); // TODO: find max x and y
+        double scale = calculateScale(maxX, maxY);
 
         for (Line line : lines) {
             drawLine(line, scale, context);
@@ -78,7 +88,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    void drawLine(Line line, double scale, GraphicsContext gc) {
+    private void drawLine(Line line, double scale, GraphicsContext gc) {
         gc.beginPath();
         double pointSize = 5.0;
 
@@ -87,7 +97,7 @@ public class Main extends Application {
 
         gc.moveTo(x, y);
         gc.fillOval(x - pointSize / 2, y - pointSize / 2, pointSize, pointSize);
-        for (int i = 1; i < line.getLineLength(); i++) {
+        for (int i = 1; i < line.getPoints().length; i++) {
             x = line.getPoints()[i].getX() * scale;
             y = HEIGHT - line.getPoints()[i].getY() * scale;
 
@@ -97,7 +107,7 @@ public class Main extends Application {
         gc.stroke();
     }
 
-    double calculateScale(double maxX, double maxY) {
+    private double calculateScale(double maxX, double maxY) {
         double margin = 0.05 * (maxX > maxY ? maxX : maxY);
         maxX += margin;
         maxY += margin;

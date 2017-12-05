@@ -8,8 +8,8 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Point> points = new ArrayList<>();    // коллекция всех точек из документа
-        ArrayList<Line> lines = new ArrayList<>();      // коллекция всех полученных линий
+        ArrayList<Point> points = new ArrayList<>();// коллекция всех точек из документа
+        ArrayList<Line> lines = new ArrayList<>();  // коллекция всех полученных линий
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("points.txt"));
@@ -28,17 +28,25 @@ public class Main {
             e.printStackTrace();
         }
 
-        Collections.sort(points); // сортировка: O(n*logn)
+        Collections.sort(points);
+        Collections.reverse(points);
 
-        // поиск линий: O(n^2)
+        double maxX = points.get(points.size()-1).getX();
+        double maxY = 0;
+
+        for (Point point : points) {
+            if (point.getY() > maxY) {
+                maxY = point.getY();
+            }
+        }
+
         while (points.size() > 0) {
             int i = 0;
-            Point startPoint = new Point();                     // начальная точка - (0;0)
+            Point startPoint = new Point(maxX, maxY);           // начальная точка - (0;0)
             ArrayList<Point> linePoints = new ArrayList<>();    // коллекция точек будущей линии
 
             do {
-                if (points.get(i).getX() >= startPoint.getX() &&
-                        points.get(i).getY() >= startPoint.getY()) {
+                if (points.get(i).getY() <= startPoint.getY()) {
                     startPoint = points.get(i); // новая точка становится начальной
                     linePoints.add(startPoint); // новая точка добавляется в линию
                     points.remove(i);           // новая точка удаляется из коллекции всех точек

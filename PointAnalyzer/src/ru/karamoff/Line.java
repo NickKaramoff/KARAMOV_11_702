@@ -7,8 +7,8 @@ public class Line {
         this.points = points;
     }
 
-    public int getLineLength() {
-        return points.length;
+    public Point[] getPoints() {
+        return points;
     }
 
     // выводит линию в виде последовательности точек
