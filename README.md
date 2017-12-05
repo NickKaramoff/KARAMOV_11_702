@@ -12,6 +12,7 @@
 * 28.11.2017 - [__/BlackjackAndLambdas__](https://github.com/NickKaramoff/KARAMOV_11_702/tree/master/BlackjackAndLambdas/src/ru/karamoff) - mapping and filtering of a list of `int`s
 * 05.12.2017 - [__/PointAnalyzer__](https://github.com/NickKaramoff/KARAMOV_11_702/tree/master/PointAnalyzer/src/ru/karamoff) - build lines out of points (it's complicated, idk how to explain)
 * 05.12.2017 - [__/PointAnalyzerFX__](https://github.com/NickKaramoff/KARAMOV_11_702/tree/master/PointAnalyzerFX/src/ru/karamoff) - graphic interface version of PointAnalyzer
+* 12.12.2017 - [__/TemperatureAnalyzer__](https://github.com/NickKaramoff/KARAMOV_11_702/tree/master/TemperatureAnalyzer/src/ru/karamoff) - analyze weather data and output least difference between month average and year average
 
 ### Classwork
 * 24.10.2017 - [__/Geometry__](https://github.com/NickKaramoff/KARAMOV_11_702/tree/master/Geometry/src/ru/karamoff) - working with different shapes to show how extending classes works
