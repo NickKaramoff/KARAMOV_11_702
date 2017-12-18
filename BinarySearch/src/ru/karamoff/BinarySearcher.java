@@ -6,7 +6,7 @@ public class BinarySearcher {
         int midPoint = start + (end - start) / 2;
         if (end - start > 0) {
             if (array[midPoint] > toFind) {
-                System.out.println("Элемент во первой половине, сужаем диапазон");
+                System.out.println("Элемент в первой половине, сужаем диапазон");
                 System.out.println();
                 return search(array, start, midPoint, toFind);
             } else if (array[midPoint] < toFind) {

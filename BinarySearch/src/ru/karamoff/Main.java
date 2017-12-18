@@ -15,5 +15,6 @@ public class Main {
         System.out.println();
 
         int a = BinarySearcher.search(testArray, 0, testArray.length - 1, numberToFind);
+//        System.out.println();
     }
 }
