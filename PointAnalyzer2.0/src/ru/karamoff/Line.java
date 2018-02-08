@@ -21,7 +21,7 @@ public class Line {
 	}
 
 	public void addPoint(Point point) {
-        this.points.add(point);
+        points.add(point);
     }
 
     // метод сразу возвращает последнюю точку; это удобнее, чем искать через size()
@@ -29,7 +29,11 @@ public class Line {
         return this.points.get(points.size() - 1);
     }
 
-    @Override
+	public ArrayList<Point> getPoints() {
+		return points;
+	}
+
+	@Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Point p : points) {

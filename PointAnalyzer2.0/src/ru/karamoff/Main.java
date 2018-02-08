@@ -7,15 +7,28 @@
 
 package ru.karamoff;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Main {
+public class Main extends Application {
 
-	public static void main(String[] args) {
+	private final double WIDTH = 1080.0;
+	private final double HEIGHT = 720.0;
+
+	@Override
+	public void start(Stage primaryStage) {
+		primaryStage.setTitle("BinarySearch Powered PointAnalyzer");
+
 		ArrayList<Point> points = new ArrayList<>();// коллекция всех точек
 		ArrayList<Line> lines = new ArrayList<>();    // коллекция всех линий
 
@@ -36,6 +49,14 @@ public class Main {
 
 		Collections.sort(points);	// сортировка по x (см. Point) / O(N*log N)
 
+		double maxX = points.get(points.size()-1).getX();
+		double maxY = 0;
+
+		for (Point point : points) {
+			if (point.getY() > maxY) {
+				maxY = point.getY();
+			}
+		}
 
 		lines.add(new Line());                   // минимум одна точка => минимум одна линия
 		lines.get(0).addPoint(points.get(0));    // самая первая по иксу точку обязательно стартует одну линию
@@ -64,5 +85,51 @@ public class Main {
 				lines) {
 			System.out.println(l.toString());	// вывод линий
 		}
+
+		Pane root = new Pane();
+
+		Canvas canvas = new Canvas(WIDTH, HEIGHT);
+		GraphicsContext context = canvas.getGraphicsContext2D();
+
+		double scale = calculateScale(maxX, maxY);
+
+		for (Line line : lines) {
+			drawLine(line, scale, context);
+		}
+
+		root.getChildren().add(canvas);
+		primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
+		primaryStage.show();
+	}
+
+	private void drawLine(Line line, double scale, GraphicsContext gc) {
+		gc.beginPath();
+		double pointSize = 5.0;
+
+		double x = line.getPoints().get(0).getX() * scale;
+		double y = HEIGHT - line.getPoints().get(0).getY() * scale;
+
+		gc.moveTo(x, y);
+		gc.fillOval(x - pointSize / 2, y - pointSize / 2, pointSize, pointSize);
+		for (int i = 1; i < line.getPoints().size(); i++) {
+			x = line.getPoints().get(i).getX() * scale;
+			y = HEIGHT - line.getPoints().get(i).getY() * scale;
+
+			gc.lineTo(x, y);
+			gc.fillOval(x - pointSize / 2, y - pointSize / 2, pointSize, pointSize);
+		}
+		gc.stroke();
+	}
+
+	private double calculateScale(double maxX, double maxY) {
+		double margin = 0.05 * (maxX > maxY ? maxX : maxY);
+		maxX += margin;
+		maxY += margin;
+
+		if (maxX / maxY < WIDTH / HEIGHT) {
+			maxX = maxY * (WIDTH / HEIGHT);
+		}
+
+		return WIDTH / maxX;
 	}
 }

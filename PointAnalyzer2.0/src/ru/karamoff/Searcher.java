@@ -27,15 +27,15 @@ public class Searcher {
 			-1 как знак того, что нужно создать нужную линию
 		*/
 		if (end - start > 1) {
-			if (point.getY() >= lines.get(midPoint).getLastPoint().getY()) {
+			if (point.getY() > lines.get(midPoint).getLastPoint().getY()) {
 				return search(lines, point, start, midPoint);
 			} else {
 				return search(lines, point, midPoint, end);
 			}
 		} else {
-			if (point.getY() >= lines.get(start).getLastPoint().getY()) {
+			if (point.getY() > lines.get(start).getLastPoint().getY()) {
 				return start;
-			} else if (point.getY() >= lines.get(end).getLastPoint().getY()) {
+			} else if (point.getY() > lines.get(end).getLastPoint().getY()) {
 				return end;
 			} else {
 				return -1;
