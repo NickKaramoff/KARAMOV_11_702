@@ -12,7 +12,7 @@ public class Main {
         BigInteger a = new BigInteger(inputA);
         BigInteger b = new BigInteger(inputB);
 
-        a.add(b);
+        a. multiply(b);
 
         System.out.println(a.toString());
     }

@@ -72,15 +72,39 @@ public class BigInteger {
         cutOffZeros();
     }
 
-//    public void multiply(BigInteger num) {
-//        BigInteger orig = new BigInteger(this.digits);
-//
-//        digits = new int[orig.digits.length + num.digits.length];
-//
-//
-//
-//        cutOffZeros();
-//    }
+    public void multiply(BigInteger num) {
+        BigInteger bigger, smaller;
+        if (this.digits.length >= num.digits.length) {
+            bigger = new BigInteger(this.digits); // I use this instead of plain this to prevent object changing
+            smaller = num;
+        } else {
+            smaller = new BigInteger(this.digits);
+            bigger = num;
+        }
+
+        digits = new int[bigger.digits.length + smaller.digits.length];
+
+        for (int i = 0; i < smaller.digits.length; i++) {
+            int a = smaller.digits[i];
+            for (int j = 0; j < bigger.digits.length; j++) {
+                int res = a*bigger.digits[j];
+
+                digits[i+j] += res % 10;
+                if (digits[i+j] >= 10) {
+                    digits[i+j+1] += digits[i+j]/10;
+                    digits[i+j] %= 10;
+                }
+
+                digits[i+j+1] += res/10;
+                if (digits[i+j+1] >= 10) {
+                    digits[i+j+2] += digits[i+j+1]/10;
+                    digits[i+j+1] %= 10;
+                }
+            }
+        }
+
+        cutOffZeros();
+    }
 
     private void cutOffZeros() {
         int zeroSince = -1;
