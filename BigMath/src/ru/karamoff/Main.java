@@ -12,8 +12,22 @@ public class Main {
         BigInteger a = new BigInteger(inputA);
         BigInteger b = new BigInteger(inputB);
 
-        a. multiply(b);
+        BigInteger s = BigInteger.sum(a,b);
+        BigInteger m = BigInteger.product(a,b);
 
-        System.out.println(a.toString());
+        System.out.println(a.toString() + " + " + b.toString() + " = " + s.toString());
+        System.out.println(a.toString() + " * " + b.toString() + " = " + m.toString());
+
+        switch (a.compareTo(b)) {
+            case 1:
+                System.out.println(a.toString() + " > " + b.toString());
+                break;
+            case 0:
+                System.out.println(a.toString() + " = " + b.toString());
+                break;
+            case -1:
+                System.out.println(a.toString() + " < " + b.toString());
+                break;
+        }
     }
 }
