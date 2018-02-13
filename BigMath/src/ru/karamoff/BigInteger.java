@@ -4,18 +4,26 @@ import java.util.Arrays;
 
 public class BigInteger implements Comparable<BigInteger> {
 
-    private int[] digits;
+    private byte[] digits;
 
 
     public BigInteger(String input) {
-        this.digits = new int[input.length()];
+        this.digits = new byte[input.length()];
         for (int i = 0; i < input.length(); i++) {
-            digits[i] = input.charAt(input.length() - i - 1) - '0';
+            if (input.charAt(input.length() - i - 1) <= '9' && input.charAt(input.length() - i - 1) >= '0') {
+                digits[i] = (byte) (input.charAt(input.length() - i - 1) - '0');
+            } else {
+                throw new NumberFormatException("Wrong input values! Only digits 0-9 should be present.");
+            }
         }
     }
 
-    public BigInteger(int[] input) {
+    public BigInteger(byte[] input) {
         this.digits = input;
+    }
+
+    public BigInteger(short input) {
+        new BigInteger((long) input);
     }
 
     public BigInteger(int input) {
@@ -23,9 +31,9 @@ public class BigInteger implements Comparable<BigInteger> {
     }
 
     public BigInteger(long input) {
-        digits = new int[String.valueOf(input).length()];
+        digits = new byte[String.valueOf(input).length()];
         for (int i = 0; i < digits.length; i++) {
-            digits[i] = (int) input % 10;
+            digits[i] = (byte) (input % 10);
             input /= 10;
         }
     }
@@ -34,7 +42,7 @@ public class BigInteger implements Comparable<BigInteger> {
     public void add(BigInteger num) {
         BigInteger orig = new BigInteger(this.digits);
 
-        digits = new int[Math.max(orig.digits.length, num.digits.length) + 1];
+        digits = new byte[Math.max(orig.digits.length, num.digits.length) + 1];
 
         boolean lesserEnd = false;
 
@@ -63,7 +71,7 @@ public class BigInteger implements Comparable<BigInteger> {
     public void multiply(BigInteger num) {
         BigInteger orig = new BigInteger(this.digits); // I use this instead of plain `this` to prevent object changing
 
-        digits = new int[orig.digits.length + num.digits.length];
+        digits = new byte[orig.digits.length + num.digits.length];
 
         for (int i = 0; i < num.digits.length; i++) {
             int a = num.digits[i]; // gets digits of the bottom number R->L

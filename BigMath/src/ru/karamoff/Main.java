@@ -12,8 +12,8 @@ public class Main {
         BigInteger a = new BigInteger(inputA);
         BigInteger b = new BigInteger(inputB);
 
-        BigInteger s = BigInteger.sum(a,b);
-        BigInteger m = BigInteger.product(a,b);
+        BigInteger s = BigInteger.sum(a, b);
+        BigInteger m = BigInteger.product(a, b);
 
         System.out.println(a.toString() + " + " + b.toString() + " = " + s.toString());
         System.out.println(a.toString() + " * " + b.toString() + " = " + m.toString());
