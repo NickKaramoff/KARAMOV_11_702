@@ -30,11 +30,7 @@ public class BigInteger implements Comparable<BigInteger> {
         }
     }
 
-    /**
-     * Adds another number to the current one.
-     *
-     * @param num Number to be added
-     */
+
     public void add(BigInteger num) {
         BigInteger orig = new BigInteger(this.digits);
 
@@ -64,37 +60,24 @@ public class BigInteger implements Comparable<BigInteger> {
         cutOffZeros();
     }
 
-    /**
-     * Multiplies current number by another one.
-     *
-     * @param num Number to be multiplied by
-     */
     public void multiply(BigInteger num) {
-        BigInteger bigger, smaller;
+        BigInteger orig = new BigInteger(this.digits); // I use this instead of plain `this` to prevent object changing
 
-        if (this.digits.length >= num.digits.length) {
-            bigger = new BigInteger(this.digits); // I use this instead of plain `this` to prevent object changing
-            smaller = num;
-        } else {
-            smaller = new BigInteger(this.digits);
-            bigger = num;
-        }
+        digits = new int[orig.digits.length + num.digits.length];
 
-        digits = new int[bigger.digits.length + smaller.digits.length];
+        for (int i = 0; i < num.digits.length; i++) {
+            int a = num.digits[i]; // gets digits of the bottom number R->L
+            for (int j = 0; j < orig.digits.length; j++) {
+                int res = a * orig.digits[j]; //multiplies bottom number digit by thr upper number
 
-        for (int i = 0; i < smaller.digits.length; i++) {
-            int a = smaller.digits[i];
-            for (int j = 0; j < bigger.digits.length; j++) {
-                int res = a * bigger.digits[j];
-
-                digits[i + j] += res % 10;
-                if (digits[i + j] >= 10) {
+                digits[i + j] += res % 10; // sums the last digit to the appropriate position
+                if (digits[i + j] >= 10) { // carry over
                     digits[i + j + 1] += digits[i + j] / 10;
                     digits[i + j] %= 10;
                 }
 
-                digits[i + j + 1] += res / 10;
-                if (digits[i + j + 1] >= 10) {
+                digits[i + j + 1] += res / 10; // sums the first digit to the appropriate position
+                if (digits[i + j + 1] >= 10) { // carry over
                     digits[i + j + 2] += digits[i + j + 1] / 10;
                     digits[i + j + 1] %= 10;
                 }
@@ -104,42 +87,26 @@ public class BigInteger implements Comparable<BigInteger> {
         cutOffZeros();
     }
 
-    /**
-     * Sums two numbers and returns the result
-     *
-     * @param n1 First number
-     * @param n2 Second number
-     * @return The result of addition
-     */
+
     public static BigInteger sum(BigInteger n1, BigInteger n2) {
         BigInteger result = new BigInteger(n1.digits);
         result.add(n2);
         return result;
     }
 
-    /**
-     * Multiplies two numbers by each other and returns the result
-     *
-     * @param n1 First number
-     * @param n2 Second number
-     * @return The result of multiplication
-     */
     public static BigInteger product(BigInteger n1, BigInteger n2) {
         BigInteger result = new BigInteger(n1.digits);
         result.multiply(n2);
         return result;
     }
 
-    /**
-     * Finds redundant zeros at the beginning of the number and deletes them
-     */
+
     private void cutOffZeros() {
         int zeroSince = -1;
         for (int i = 0; i < digits.length; i++) {
             if (digits[i] == 0 && zeroSince == -1) {
                 zeroSince = i;
-            }
-            if (digits[i] != 0 && zeroSince != -1) {
+            } else if (digits[i] != 0 && zeroSince != -1) {
                 zeroSince = -1;
             }
         }
