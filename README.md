@@ -15,6 +15,7 @@
 * 05.12 - [__/PointAnalyzerFX__](PointAnalyzerFX/src/ru/karamoff) - graphic interface version of PointAnalyzer
 * 12.12 - [__/PointAnalyzer2.0__](PointAnalyzer2.0/src/ru/karamoff) - PointAnalyzer that works faster and better
 * 12.12 - [__/TemperatureAnalyzer__](TemperatureAnalyzer/src/ru/karamoff) - analyze weather data and output least difference between month average and year average
+* 15.12 - [__/Lists__](Lists/src/ru/karamoff) - custom coded `Collection` and `List` interfaces, `ArrayList` and `LinkedList` classes
 
 #### 2018
 * 08.02 - [__/BigMath__](BigMath/src/ru/karamoff) - big arithmetics (addition and multiplication)
