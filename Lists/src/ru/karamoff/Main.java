@@ -4,16 +4,19 @@ public class Main {
 
     public static void main(String[] args) {
         List list = new LinkedList();
-        list.addToBegin(123);
-        list.addToBegin(124);
-        list.addToBegin(125);
-        list.addToBegin(126);
-        list.add(505);
-        list.add(404);
+        list.addToBegin(123); // 123
+        list.addToBegin(124); // 124, 123
+        list.addToBegin(125); // 125, 124, 123
+        list.addToBegin(126); // 126, 125, 124, 123
+        list.add(505);              // 126, 125, 124, 123, 505
+        list.add(404);              // 126, 125, 124, 123, 505, 404
 
-        list.remove(404);
-        System.out.println(list.get(4));
+        System.out.println(list.toString());
 
-        int i = 0;
+        list.remove(123);   // 126, 125, 124, 505, 404
+        list.remove(126);   // 125, 124, 505, 404
+        list.remove(404);   // 125, 124, 505
+
+        System.out.println(list.toString());
     }
 }

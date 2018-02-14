@@ -1,5 +1,6 @@
 package ru.karamoff;
 
+
 public class LinkedList implements List {
 
     private static class Node {
@@ -11,6 +12,7 @@ public class LinkedList implements List {
             this.next = null;
         }
     }
+
     // ссылка на первый элемент списка
     private Node head;
     // ссылка на последний элемент списка
@@ -54,37 +56,67 @@ public class LinkedList implements List {
         tail = newNode;
     }
 
+    /*
+     *  Метод удаляет объект из списка
+     */
     @Override
     public void remove(Object element) {
-        if (contains(element)){
-            if (head.value.equals(element)) {
-                head = head.next;
-                return;
-            }
-            Node pointer = head;
-            while (pointer.next != null) {
-                if (pointer.next.value.equals(element)) {
-                    pointer.next = pointer.next.next;
-                    return;
-                }
-            }
+        if (head.value.equals(element)) {
+            head = head.next; // если искомый объект в "голове" -> делаем новую "голову"
         } else {
-            System.out.println("Элемент не найден");
+            Node found = findInNext(element);   // узел-указатель ищет узел, что находится
+                                                // перед узлом с искомым объектом
+            if (found != null) {
+                if (tail == found.next) {
+                    tail = found; // если найденный элемент был "хвостом", мы перестраиваем хвост
+                }
+                found.next = found.next.next; // так или иначе мы просто переподключаем узел
+            } else {
+                System.err.println("Element not found"); // если элемента нет, выводим ошибку
+            }
         }
     }
 
+    /*
+     *  Метод возвращает true, если объект есть в списке и false, если его нет
+     */
     @Override
     public boolean contains(Object element) {
-        if (head.value.equals(element)) {
-            return true;
-        }
-        Node pointer = head;
-        while (pointer.next != null) {
+        // true <- если объект лежит в "голове" или он есть в чьём-нибудь следующем узле
+        // если ни то, ни то не выполняется -> false
+        return head.value.equals(element) || findInNext(element) != null;
+    }
+
+    /*
+     *  Метод ищет определённый объект и возвращает предыдущий узел
+     */
+    private Node findInNext(Object element) {
+        Node pointer = head; // начинаем поиск с "головы"
+
+        // ищем, пока не дойдём до конца или не вернёмся к началу
+        while (pointer.next != null && !pointer.next.equals(head)) {
             if (pointer.next.value.equals(element)) {
-                return true;
+                return pointer; // если объект лежит в следующем узле, возвращаем текущий
+            } else {
+                pointer = pointer.next; // иначе - ищем дальше
             }
-            pointer.next = pointer.next.next;
         }
-        return false;
+        return null; // возвращаем null, если объекта нет
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        Node pointer = head;
+        do {
+            builder.append(pointer.value);
+            if (pointer.next != null && !pointer.next.equals(head)) {
+                builder.append(", ");
+            }
+            pointer = pointer.next;
+        } while (pointer != null && !pointer.equals(head));
+        builder.append("]");
+        return builder.toString();
     }
 }
