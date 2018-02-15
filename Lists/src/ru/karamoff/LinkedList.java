@@ -18,6 +18,8 @@ public class LinkedList implements List {
     // ссылка на последний элемент списка
     private Node tail;
 
+    private int length = 0;
+
     public LinkedList() {
         this.head = null;
         this.tail = null;
@@ -47,13 +49,20 @@ public class LinkedList implements List {
             newNode.next = head;
             head = newNode;
         }
+        length++;
     }
 
     @Override
     public void add(Object element) {
         Node newNode = new Node(element);
-        tail.next = newNode;
-        tail = newNode;
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        length++;
     }
 
     /*
@@ -62,10 +71,15 @@ public class LinkedList implements List {
     @Override
     public void remove(Object element) {
         if (head.value.equals(element)) {
-            head = head.next; // если искомый объект в "голове" -> делаем новую "голову"
+            if (tail.value.equals(element)) {
+                head = null;
+                tail = null;
+            } else {
+                head = head.next;
+            }   // если искомый объект в "голове" -> делаем новую "голову"
         } else {
             Node found = findInNext(element);   // узел-указатель ищет узел, что находится
-                                                // перед узлом с искомым объектом
+            // перед узлом с искомым объектом
             if (found != null) {
                 if (tail == found.next) {
                     tail = found; // если найденный элемент был "хвостом", мы перестраиваем хвост
@@ -75,6 +89,7 @@ public class LinkedList implements List {
                 System.err.println("Element not found"); // если элемента нет, выводим ошибку
             }
         }
+        length--;
     }
 
     /*
@@ -102,6 +117,61 @@ public class LinkedList implements List {
             }
         }
         return null; // возвращаем null, если объекта нет
+    }
+
+    public static LinkedList sort(LinkedList toSort) {
+        LinkedList[] stack = new LinkedList[32];
+        int count = 0;
+
+        while (toSort.head != null) {
+            stack[count] = new LinkedList();
+            stack[count].add(toSort.head.value);
+            toSort.remove(toSort.head.value);
+            count++;
+
+            if (count >= 2) {
+                if (stack[count - 1].length == stack[count - 2].length) {
+                    stack[count-2] = merge(stack[count-2], stack[count-1]);
+                    count--;
+                }
+            }
+        }
+
+        while (count != 1) {
+            stack[count-2] = merge(stack[count-2], stack[count-1]);
+            count--;
+        }
+
+        return stack[0];
+    }
+
+    public static LinkedList merge(LinkedList sorted1, LinkedList sorted2) {
+        LinkedList merged = new LinkedList();
+        while (sorted1.head != null && sorted2.head != null) {
+            if ((int) sorted1.head.value < (int) sorted2.head.value) {
+                merged.add(sorted1.head.value);
+                sorted1.remove(sorted1.head.value);
+            } else {
+                merged.add(sorted2.head.value);
+                sorted2.remove(sorted2.head.value);
+            }
+        }
+        if (sorted1.head == null) {
+            while (sorted2.head != null) {
+                merged.add(sorted2.head.value);
+                sorted2.remove(sorted2.head.value);
+            }
+        } else if (sorted2.head == null) {
+            while (sorted1.head != null) {
+                merged.add(sorted1.head.value);
+                sorted1.remove(sorted1.head.value);
+            }
+        }
+        return merged;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     @Override

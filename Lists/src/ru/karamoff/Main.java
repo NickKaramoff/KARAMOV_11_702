@@ -3,20 +3,33 @@ package ru.karamoff;
 public class Main {
 
     public static void main(String[] args) {
-        List list = new LinkedList();
-        list.addToBegin(123); // 123
-        list.addToBegin(124); // 124, 123
-        list.addToBegin(125); // 125, 124, 123
-        list.addToBegin(126); // 126, 125, 124, 123
-        list.add(505);              // 126, 125, 124, 123, 505
-        list.add(404);              // 126, 125, 124, 123, 505, 404
+        LinkedList list1 = new LinkedList();
+        LinkedList list2 = new LinkedList();
 
-        System.out.println(list.toString());
+        list1.add(8);
+        list1.add(3);
+        list1.add(5);
+        list1.add(9);
+        list1.add(6);
 
-        list.remove(123);   // 126, 125, 124, 505, 404
-        list.remove(126);   // 125, 124, 505, 404
-        list.remove(404);   // 125, 124, 505
+        list2.add(7);
+        list2.add(2);
+        list2.add(4);
+        list2.add(1);
 
-        System.out.println(list.toString());
+        System.out.println("List 1: " + list1.toString());
+        System.out.println("List 2: " + list2.toString());
+        System.out.println();
+
+        list1 = LinkedList.sort(list1);
+        list2 = LinkedList.sort(list2);
+
+        System.out.println("List 1 sorted: " + list1.toString());
+        System.out.println("List 2 sorted: " + list2.toString());
+        System.out.println();
+
+        LinkedList list3 = LinkedList.merge(list1,list2);
+
+        System.out.println("Lists 1 & 2 merged: " + list3);
     }
 }
