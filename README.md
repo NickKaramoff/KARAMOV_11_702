@@ -18,7 +18,7 @@
 
 #### 2018
 * 08.02 - [__/BigMath__](BigMath/src/ru/karamoff) - big arithmetics (addition and multiplication)
-* 15.02 - [__/Lists__](Lists/src/ru/karamoff) - custom coded `Collection` and `List` interfaces, `ArrayList` and `LinkedList` classes
+* 15.02 - [__/Lists__](Lists/src/ru/karamoff) - custom coded `Collection` and `List` interfaces, `ArrayList` and `LinkedList` classes. Supports sorting.
 
 ### Classwork
 #### 2017
