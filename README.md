@@ -19,15 +19,16 @@
 #### 2018
 * 08.02 - [__/BigMath__](BigMath/src/ru/karamoff) - big arithmetics (addition and multiplication)
 * 15.02 - [__/Lists__](Lists/src/ru/karamoff) - custom coded `Collection` and `List` interfaces, `ArrayList` and `LinkedList` classes. Supports sorting.
+* 23.02 - [__/HullFinder__](HullFinder/src/ru/karamoff) - finds the hull, surrounding all the given points
 
 ### Classwork
 #### 2017
 * 24.10 - [__/Geometry__](Geometry/src/ru/karamoff) - working with different shapes to show how extending classes works
-* 05.12 - [__/BinarySearch__](BinarySearch/src/ru/karamoff) - binary search algorithm for a sorted array of positive `int`s.
+* 05.12 - [__/BinarySearch__](BinarySearch/src/ru/karamoff) - binary search algorithm for a sorted array of positive `int`s
 
 #### 2018
 * 08.02 - [__/BiggerBetterNumber__](BiggerBetterNumber/src/ru/karamoff) - finds amount of numbers that are built from the same digits and are bigger than the original
+* 21.02 - [__/PointsHiLo](PointsHiLo/src/ru/karamoff) - determines if the point is higher or lower than a vector, if the latter becomes the x-axis
 
 ### Other
-* ??? - [__/HullFinder__](HullFinder/src/ru/karamoff) - finds the 'hull', surrounding all the given points
 * ??? - [__/Matrixer__](Matrixer/src/ru/karamoff) - something about storing a matrix and searching through it. I don't even know if it's finished or not
