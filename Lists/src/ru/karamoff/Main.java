@@ -3,8 +3,8 @@ package ru.karamoff;
 public class Main {
 
     public static void main(String[] args) {
-        LinkedList list1 = new LinkedList();
-        LinkedList list2 = new LinkedList();
+        LinkedList<Integer> list1 = new LinkedList<>();
+        LinkedList<Integer> list2 = new LinkedList<>();
 
         list1.add(8);
         list1.add(3);

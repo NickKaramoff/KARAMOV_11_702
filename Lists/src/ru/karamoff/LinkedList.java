@@ -1,11 +1,38 @@
 package ru.karamoff;
 
 
+import java.util.Iterator;
+
 public class LinkedList<T> implements List<T> {
 
-    private static class Node<T> {
+    private class LinkedListIterator implements Iterator<T> {
+        private int index;
+
+        public LinkedListIterator() {
+            this.index = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < length;
+        }
+
+        @Override
+        public T next() {
+            T result = get(index);
+            index++;
+            return result;
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private class Node {
         T value;
-        Node<T> next;
+        Node next;
 
         Node(T value) {
             this.value = value;
@@ -14,9 +41,9 @@ public class LinkedList<T> implements List<T> {
     }
 
     // ссылка на первый элемент списка
-    private Node<T> head;
+    private Node head;
     // ссылка на последний элемент списка
-    private Node<T> tail;
+    private Node tail;
 
     private int length = 0;
 
@@ -27,7 +54,7 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        Node<T> pointer = this.head;
+        Node pointer = this.head;
         for (int i = 1; i <= index; i++) {
             pointer = pointer.next;
         }
@@ -40,7 +67,7 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public void addToBegin(T object) {
-        Node<T> newNode = new Node<>(object);
+        Node newNode = new Node(object);
 
         if (head == null) {
             head = newNode;
@@ -54,7 +81,7 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public void add(T element) {
-        Node<T> newNode = new Node<>(element);
+        Node newNode = new Node(element);
         if (head == null) {
             head = newNode;
             tail = newNode;
@@ -78,7 +105,7 @@ public class LinkedList<T> implements List<T> {
                 head = head.next;
             }   // если искомый объект в "голове" -> делаем новую "голову"
         } else {
-            Node<T> found = findInNext(element);   // узел-указатель ищет узел, что находится
+            Node found = findInNext(element);   // узел-указатель ищет узел, что находится
             // перед узлом с искомым объектом
             if (found != null) {
                 if (tail == found.next) {
@@ -105,8 +132,8 @@ public class LinkedList<T> implements List<T> {
     /*
      *  Метод ищет определённый объект и возвращает предыдущий узел
      */
-    private Node<T> findInNext(T element) {
-        Node<T> pointer = head; // начинаем поиск с "головы"
+    private Node findInNext(T element) {
+        Node pointer = head; // начинаем поиск с "головы"
 
         // ищем, пока не дойдём до конца или не вернёмся к началу
         while (pointer.next != null && !pointer.next.equals(head)) {
@@ -119,9 +146,9 @@ public class LinkedList<T> implements List<T> {
         return null; // возвращаем null, если объекта нет
     }
 
-    public static <E extends Comparable<E>> LinkedList<E> sort(LinkedList<E> toSort) {
+    public static <T extends Comparable<T>> LinkedList<T> sort(LinkedList<T> toSort) {
 
-        LinkedList<E>[] stack = new LinkedList[32];
+        LinkedList<T>[] stack = new LinkedList[32]; // FIXME: 22.02.18
         int count = 0;
 
         while (toSort.head != null) {
@@ -132,22 +159,25 @@ public class LinkedList<T> implements List<T> {
 
             if (count >= 2) {
                 if (stack[count - 1].length == stack[count - 2].length) {
-                    stack[count-2] = merge(stack[count-2], stack[count-1]);
+                    stack[count - 2] = merge(stack[count - 2], stack[count - 1]);
                     count--;
                 }
             }
         }
 
         while (count != 1) {
-            stack[count-2] = merge(stack[count-2], stack[count-1]);
+            stack[count - 2] = merge(stack[count - 2], stack[count - 1]);
             count--;
         }
 
         return stack[0];
     }
 
-    public static <E extends Comparable<E>> LinkedList<E> merge(LinkedList<E> sorted1, LinkedList<E> sorted2) {
-        LinkedList<E> merged = new LinkedList<>();
+    public static <T extends Comparable<T>> LinkedList<T> merge(LinkedList<T> sorted1,
+                                                                LinkedList<T> sorted2) {
+        LinkedList<T> merged = new LinkedList<>();
+
+
         while (sorted1.head != null && sorted2.head != null) {
             if (sorted1.head.value.compareTo(sorted2.head.value) < 0) {
                 merged.add(sorted1.head.value);
@@ -168,10 +198,12 @@ public class LinkedList<T> implements List<T> {
                 sorted1.remove(sorted1.head.value);
             }
         }
+
         return merged;
     }
 
-    public int getLength() {
+    @Override
+    public int size() {
         return length;
     }
 
@@ -179,7 +211,7 @@ public class LinkedList<T> implements List<T> {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
-        Node<T> pointer = head;
+        Node pointer = head;
         do {
             builder.append(pointer.value);
             if (pointer.next != null && !pointer.next.equals(head)) {
