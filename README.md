@@ -28,7 +28,7 @@
 
 #### 2018
 * 08.02 - [__/BiggerBetterNumber__](BiggerBetterNumber/src/ru/karamoff) - finds amount of numbers that are built from the same digits and are bigger than the original
-* 21.02 - [__/PointsHiLo](PointsHiLo/src/ru/karamoff) - determines if the point is higher or lower than a vector, if the latter becomes the x-axis
+* 21.02 - [__/PointsHiLo__](PointsHiLo/src/ru/karamoff) - determines if the point is higher or lower than a vector, if the latter becomes the x-axis
 
 ### Other
 * ??? - [__/Matrixer__](Matrixer/src/ru/karamoff) - something about storing a matrix and searching through it. I don't even know if it's finished or not
