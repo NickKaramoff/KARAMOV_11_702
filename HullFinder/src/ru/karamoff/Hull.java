@@ -63,6 +63,9 @@ public class Hull {
     public ArrayList<Point> getHull() {
         return hull;
     }
+    public ArrayList<Point> getPoints() {
+        return points;
+    }
 
     @Override
     public String toString() {
