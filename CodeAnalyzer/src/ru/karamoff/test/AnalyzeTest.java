@@ -4,7 +4,7 @@ import org.junit.*;
 import ru.karamoff.Analyzer;
 import ru.karamoff.SyntaxException;
 
-public class AnalyzeTest extends AnalyzerTest {
+public class AnalyzeTest {
     
     @Test
     public void correctData() {

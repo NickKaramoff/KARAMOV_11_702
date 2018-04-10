@@ -82,8 +82,6 @@ public class Analyzer {
 
         if (state != 0) {
             throw new SyntaxException("На позиции " + (input.length() - 1) + " ожидалось ';'");
-        } else {
-            System.out.println("\u001B[92m" + "Строка корректна" + "\u001B[0m");
         }
     }
 
@@ -142,7 +140,6 @@ public class Analyzer {
                         }
 
                         var.setValue(number);
-                        break;
                     }
                 }
 
