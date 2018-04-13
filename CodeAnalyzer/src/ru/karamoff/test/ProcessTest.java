@@ -1,35 +1,37 @@
 package ru.karamoff.test;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 import ru.karamoff.Analyzer;
 import ru.karamoff.Variable;
 import ru.karamoff.VariableNotFoundException;
 
 import java.util.ArrayList;
 
+
 public class ProcessTest {
+    @Test (expected = VariableNotFoundException.class)
+    public void wrongCode() {
+        String input = "X1:=10;T5:=Z7;";
+        ArrayList<Variable> res = Analyzer.process(input);
+    }
 
     @Test
-    public void correctData(){
-        String input = "X1:=128;Y2:=56;Z1:=X1+Y2;M5:=X1-Y2*Z1;Y2:=M5/X1;";
-        ArrayList<Variable> actual = Analyzer.process(input);
+    public void rightCode() {
+        String input = "X1:=5;Y2:=10;T1:=X1;N9:=X1+Y2;M0:=N9/X1+N9;";
+        ArrayList<Variable> res = Analyzer.process(input);
+        ArrayList<Variable> exp = new ArrayList<>();
 
-        ArrayList<Variable> expected = new ArrayList<>();
-        expected.add(new Variable("X1", 128));
-        expected.add(new Variable("Y2", 103));
-        expected.add(new Variable("Z1", 184));
-        expected.add(new Variable("M5", 13248));
+        exp.add(new Variable("X1", 5));
+        exp.add(new Variable("Y2", 10));
+        exp.add(new Variable("T1", 5));
+        exp.add(new Variable("N9", 15));
+        exp.add(new Variable("M0", 18));
 
-        Assert.assertEquals(expected.size(), actual.size());
-        for (int i = 0; i < actual.size();i++){
-            Assert.assertTrue(expected.get(i).equalsBoth(actual.get(i)));
+        Assert.assertEquals(exp.size(), res.size());
+
+        for (int i = 0; i < res.size(); i++) {
+            Assert.assertTrue(exp.get(i).equalsBoth(res.get(i)));
         }
     }
-
-    @Test (expected = VariableNotFoundException.class)
-    public void wrongData() {
-        String input = "X1:=128;Y2:=Z1;";
-        ArrayList<Variable> actual = Analyzer.process(input);
-    }
 }
+
