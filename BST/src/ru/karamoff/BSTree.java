@@ -50,6 +50,10 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
 
     @Override
     public boolean remove(T value) {
+        return contains(value) && remove(value, this.root);
+    }
+
+    private boolean remove(T value, Node root) {
         return false;
     }
 
