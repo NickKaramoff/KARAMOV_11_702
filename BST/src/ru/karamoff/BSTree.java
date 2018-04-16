@@ -1,11 +1,10 @@
 package ru.karamoff;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class BSTree<T extends Comparable<T>> implements Tree<T> {
 
-    private class Node {
+    class Node {
         Node left, right;
         T value;
 
@@ -14,16 +13,11 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
             this.left = null;
             this.right = null;
         }
-
-        @Override
-        public String toString() {
-            return value.toString();
-        }
     }
 
 
-    private Node root;
-    private ArrayList<Integer> levels = new ArrayList<>();
+    Node root;
+    ArrayList<Integer> levels = new ArrayList<>();
 
 
     public BSTree() {
@@ -35,7 +29,6 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
             insert(elem);
         }
     }
-
 
     @Override
     public void insert(T value) {
@@ -74,8 +67,8 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
     private Node remove(T value, Node root, int level) {
         if (root.value.compareTo(value) == 0) {
             if (root.left != null && root.right != null) {
-                root.value = findMin(root.right).value;
-                root.right = remove(root.value, root.right, level + 1);
+                root.value = findMax(root.left).value;
+                root.left = remove(root.value, root.left, level + 1);
             } else {
 
                 levels.set(level, levels.get(level) - 1);
@@ -101,12 +94,12 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
         return root;
     }
 
-    private Node findMin(Node root) {
-        if (root.left == null) {
+    private Node findMax(Node root) {
+        if (root.right == null) {
             return root;
         }
 
-        return findMin(root.left);
+        return findMax(root.right);
     }
 
 
@@ -138,7 +131,7 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
     private void print(Node root) {
         if (root != null) {
             print(root.left);
-            System.out.print(root.value);
+            System.out.print(root.value + " ");
             print(root.right);
         }
     }
@@ -146,8 +139,6 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
 
     @Override
     public void printByLevels() {
-//        ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
-
         T[] nodeArr = (T[]) new Comparable[(1 << (height() + 1)) - 1];
 
         distributeLevels(root, 0, nodeArr);
@@ -175,7 +166,7 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
             array[position] = null;
         }
     }
-    
+
 
     @Override
     public boolean isBST() {
