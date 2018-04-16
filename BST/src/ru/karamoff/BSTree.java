@@ -1,8 +1,7 @@
 package ru.karamoff;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Arrays;
 
 public class BSTree<T extends Comparable<T>> implements Tree<T> {
 
@@ -24,7 +23,7 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
 
 
     private Node root;
-    private int height;
+    private ArrayList<Integer> levels = new ArrayList<>();
 
 
     public BSTree() {
@@ -46,7 +45,12 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
     private Node insert(T value, Node root, int level) {
         if (root == null) {
             root = new Node(value);
-            height = height <= level ? level : height;
+
+            if (level == levels.size()) {
+                levels.add(1);
+            } else {
+                levels.set(level, levels.get(level) + 1);
+            }
         } else {
             if (value.compareTo(root.value) <= 0) {
                 root.left = insert(value, root.left, level + 1);
@@ -61,18 +65,24 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
 
     @Override
     public boolean remove(T value) {
-        boolean contained = contains(value);
-        this.root = remove(value, this.root);
+        if (!contains(value)) return false;
 
-        return contained;
+        root = remove(value, root, 0);
+        return true;
     }
 
-    private Node remove(T value, Node root) {
+    private Node remove(T value, Node root, int level) {
         if (root.value.compareTo(value) == 0) {
             if (root.left != null && root.right != null) {
                 root.value = findMin(root.right).value;
-                root.right = remove(root.value, root.right);
+                root.right = remove(root.value, root.right, level + 1);
             } else {
+
+                levels.set(level, levels.get(level) - 1);
+                if (levels.get(levels.size() - 1) == 0) {
+                    levels.remove(levels.size() - 1);
+                }
+
                 if (root.left != null) {
                     return root.left;
                 } else if (root.right != null) {
@@ -83,9 +93,9 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
             }
         } else {
             if (root.value.compareTo(value) > 0) {
-                root.left = remove(value, root.left);
+                root.left = remove(value, root.left, level + 1);
             } else {
-                root.right = remove(value, root.right);
+                root.right = remove(value, root.right, level + 1);
             }
         }
         return root;
@@ -136,30 +146,19 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
 
     @Override
     public void printByLevels() {
-        ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
-        printByLevels(root, 0, nodes); // генерируем список по уровням
+//        ArrayList<ArrayList<Node>> nodes = new ArrayList<>();
 
-        nodes.remove(nodes.size() - 1); // последний уровень всегда нулевой
+        T[] nodeArr = (T[]) new Comparable[(1 << (height() + 1)) - 1];
 
-        // заполняем оставшееся нуллами, чтобы обеспечить деревообразный вывод
-        for (int i = 0; i < nodes.size(); i++) {
-            while (nodes.get(i).size() < (1 << i)) {
-                nodes.get(i).add(null);
-            }
-        }
+        distributeLevels(root, 0, nodeArr);
 
         // выводим корень
-        System.out.println(nodes.get(0).get(0).value);
+        System.out.println(nodeArr[0]);
 
-        for (int i = 1; i < nodes.size(); i++) {
-            for (int j = 0; j < nodes.get(i).size(); j++) {
-                Node node = nodes.get(i).get(j);
-
-                // вывод значения или дефиса-пропуска
-                System.out.print((node != null ? node.value : "∙"));
-
-                // вывод нужного количества табов: 2^(высота-уровень-1)
-                for (int k = 0; k < (1 << (nodes.size() - i - 1)); k++) {
+        for (int i = 1; i < height(); i++) {
+            for (int j = (1 << i) - 1; j < (1 << (i + 1)) - 1; j++) {
+                System.out.print((nodeArr[j] != null ? nodeArr[j] : "∙"));
+                for (int k = 0; k < (1 << (height() - i - 1)); k++) {
                     System.out.print("\t");
                 }
             }
@@ -167,21 +166,16 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
         }
     }
 
-    private void printByLevels(Node root, int level, ArrayList<ArrayList<Node>> nodes) {
-        if (level == nodes.size()) {
-            nodes.add(new ArrayList<>());
-        }
-        nodes.get(level).add(root);
-
+    private void distributeLevels(Node root, int position, T[] array) {
         if (root != null) {
-            printByLevels(root.left, level + 1, nodes);
-            printByLevels(root.right, level + 1, nodes);
-        } else if (level < height) {
-            printByLevels(null, level + 1, nodes);
-            printByLevels(null, level + 1, nodes);
+            array[position] = root.value;
+            distributeLevels(root.left, (2 * position) + 1, array);
+            distributeLevels(root.right, (2 * position) + 2, array);
+        } else {
+            array[position] = null;
         }
     }
-
+    
 
     @Override
     public boolean isBST() {
@@ -218,10 +212,14 @@ public class BSTree<T extends Comparable<T>> implements Tree<T> {
             return false;
         }
 
-        if ( tR.value.equals(oR.value)) {
+        if (tR.value.equals(oR.value)) {
             return equals(tR.right, oR.right) && equals(tR.left, oR.left);
         } else {
             return false;
         }
+    }
+
+    public int height() {
+        return levels.size();
     }
 }
