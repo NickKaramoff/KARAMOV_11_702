@@ -16,10 +16,15 @@ public class MainTest {
     }
 
     @Test
-    public void main() {
-        Assert.assertEquals(2, Optimizer.optimize(nodes[0], 4));
-        Assert.assertEquals(3, Optimizer.optimize(nodes[1], 2));
-        Assert.assertEquals(2, Optimizer.optimize(nodes[2], 2));
-        Assert.assertEquals(0, Optimizer.optimize(nodes[3], 3));
+    public void optimize() {
+        Assert.assertEquals(2, Main.optimize(nodes[0], 4));
+        Assert.assertEquals(3, Main.optimize(nodes[1], 2));
+        Assert.assertEquals(2, Main.optimize(nodes[2], 2));
+        Assert.assertEquals(0, Main.optimize(nodes[3], 3));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void badOptimize() {
+        Main.optimize(nodes[0], 1);
     }
 }
