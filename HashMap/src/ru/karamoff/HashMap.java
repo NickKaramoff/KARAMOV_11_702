@@ -2,29 +2,29 @@ package ru.karamoff;
 
 public class HashMap<K, V> implements Map<K, V> {
 
-    private Node[] storage;
+    private Node<K, V>[] storage;
     private final int STORAGE_SIZE = 15; // должна быть 2^n-1
 
-    private class Node {
-        K key;
-        V value;
-        Node next;
+    private class Node<NK, NV> {
+        NK key;
+        NV value;
+        Node<NK, NV> next;
 
-        public Node(K key, V value) {
+        public Node(NK key, NV value) {
             this.key = key;
             this.value = value;
         }
     }
 
     public HashMap() {
-        storage = (Node[]) new Object[STORAGE_SIZE];
+        storage = new Node[STORAGE_SIZE];
     }
 
     public void put(K key, V value) {
-        Node node = storage[key.hashCode() & STORAGE_SIZE];
+        Node<K, V> node = storage[key.hashCode() & STORAGE_SIZE];
 
         if (node == null) {
-            storage[key.hashCode() & STORAGE_SIZE] = new Node(key, value);
+            storage[key.hashCode() & STORAGE_SIZE] = new Node<>(key, value);
         } else {
             boolean exists = node.key.equals(key);
 
@@ -36,13 +36,13 @@ public class HashMap<K, V> implements Map<K, V> {
             if (exists) {
                 node.value = value;
             } else {
-                node.next = new Node(key, value);
+                node.next = new Node<>(key, value);
             }
         }
     }
 
     public V get(K key) {
-        Node node = storage[key.hashCode() & STORAGE_SIZE];
+        Node<K, V> node = storage[key.hashCode() & STORAGE_SIZE];
 
         if (node != null) {
             boolean found = node.key.equals(key);
