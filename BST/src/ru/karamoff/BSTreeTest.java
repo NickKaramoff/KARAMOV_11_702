@@ -5,19 +5,19 @@ import org.junit.*;
 import java.io.ByteArrayOutputStream;
 
 public class BSTreeTest {
-    private BSTree<Integer> expectedTree, badTree;
+    private BSTree<Integer> expected, bad;
 
     @Before
     public void setUp() {
-        expectedTree = (new DummyBSTree()).getTree();
-        badTree = (new DummyBSTree()).getBadTree();
+        expected = (new DummyBSTree()).getTree();
+        bad = (new DummyBSTree()).getBadTree();
     }
 
     @Test
     public void insert() {
-        BSTree<Integer> actualTree = new BSTree<>(new Integer[]{5, 2, 7, 3, 8, 4, 2, 9});
+        BSTree<Integer> actual = new BSTree<>(new Integer[]{5, 2, 7, 3, 8, 4, 2, 9});
 
-        Assert.assertTrue(actualTree.equals(expectedTree));
+        Assert.assertTrue(expected.equals(actual));
     }
 
     @Test
@@ -25,13 +25,13 @@ public class BSTreeTest {
         BSTree<Integer> actualTree = new BSTree<>(new Integer[]{5, 2, 2, 7, 3, 8, 4, 2, 9});
         actualTree.remove(2);
 
-        Assert.assertTrue(actualTree.equals(expectedTree));
+        Assert.assertTrue(expected.equals(actualTree));
     }
 
     @Test
     public void contains() {
-        Assert.assertTrue(expectedTree.contains(7));
-        Assert.assertFalse(expectedTree.contains(10));
+        Assert.assertTrue(expected.contains(7));
+        Assert.assertFalse(expected.contains(10));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class BSTreeTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
 
-        expectedTree.print();
+        expected.print();
         Assert.assertEquals("2 2 3 4 5 7 8 9 ", out.toString());
     }
 
@@ -48,7 +48,7 @@ public class BSTreeTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
 
-        expectedTree.printByLevels();
+        expected.printByLevels();
 
 
         String expectedOutput = "5\n" +
@@ -61,7 +61,7 @@ public class BSTreeTest {
 
     @Test
     public void isBST() {
-        Assert.assertTrue(expectedTree.isBST());
-        Assert.assertFalse(badTree.isBST());
+        Assert.assertTrue(expected.isBST());
+        Assert.assertFalse(bad.isBST());
     }
 }
