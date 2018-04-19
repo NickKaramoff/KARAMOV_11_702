@@ -21,10 +21,10 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     public void put(K key, V value) {
-        Node<K, V> node = storage[key.hashCode() & STORAGE_SIZE];
+        Node<K, V> node = storage[key.hashCode() & (STORAGE_SIZE-1)];
 
         if (node == null) {
-            storage[key.hashCode() & STORAGE_SIZE] = new Node<>(key, value);
+            storage[key.hashCode() & (STORAGE_SIZE-1)] = new Node<>(key, value);
         } else {
             boolean exists = node.key.equals(key);
 
@@ -42,7 +42,7 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     public V get(K key) {
-        Node<K, V> node = storage[key.hashCode() & STORAGE_SIZE];
+        Node<K, V> node = storage[key.hashCode() & (STORAGE_SIZE-1)];
 
         if (node != null) {
             boolean found = node.key.equals(key);
