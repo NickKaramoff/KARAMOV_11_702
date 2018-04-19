@@ -1,0 +1,10 @@
+1 Nikita 18
+2 Marsel 24
+3 Arslanov 72
+4 Maxim 18
+5 Somebody 24
+6 Dasha 18
+7 PewDiePie 28
+8 Grandpa 70
+9 Mom 48
+10 Son 6

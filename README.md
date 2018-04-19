@@ -50,9 +50,11 @@
 * 14.03 - [__/BST__](BST/src/ru/karamoff) - binary search tree implementation.
 * 15.03 - [__/HashMap__](HashMap/src/ru/karamoff) - homemade Java `HashMap`.
 * 11.04 - [__/TreeOptimizer__](TreeOptimizer/src/ru/karamoff) - optimizes a tree
-  by reducing the number of its nodes' children
+  by reducing the number of its nodes' children.
 * 12.04 - [__/ThreadSum__](ThreadSum/src/ru/karamoff) - counts the sum of a
-  random array using multiple `Thread`s (that's not optimal by any means)
+  random array using multiple `Thread`s (that's not optimal by any means).
+* 19.04 - [__/FindCars__](FindCars/src/ru/karamoff) - find the amount of cars
+  that users of every specified age have.
 
 ### Other
 * ??? - [__/Matrixer__](Matrixer/src/ru/karamoff) - something about storing a
