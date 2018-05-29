@@ -16,7 +16,7 @@ public class Graph {
         }
 
         for (int i = 0; i < matrix.length - 1; i++) {
-            for (int j = i + 1; j < matrix.length; j++) {
+            for (int j = i + 1; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
                     vertices[i].addNeighbour(vertices[j]);
                     vertices[j].addNeighbour(vertices[i]);
@@ -32,9 +32,8 @@ public class Graph {
     public boolean isTree() {
         if (vertices.length == 0) return true;
 
-        vertices[0].mark();
-        boolean mark = vertices[0].markNeighbors(null);
-        if (!mark) return false;
+        boolean result = vertices[0].markWithNeighbors(null);
+        if (!result) return false;
         for (Vertex v : vertices) {
             if (!v.marked) return false;
         }
@@ -44,14 +43,13 @@ public class Graph {
     public boolean isForest() {
         if (isTree()) return true;
 
-        boolean mark = true;
+        boolean result = true;
         for (Vertex v : vertices) {
             if (!v.marked) {
-                v.mark();
-                mark = mark & v.markNeighbors(null);
+                result = result && v.markWithNeighbors(null);
             }
         }
-        return mark;
+        return result;
     }
 
     @Override
@@ -69,12 +67,8 @@ public class Graph {
         private boolean marked;
 
         public Vertex(int number) {
-            this(number, new ArrayList<>());
-        }
-
-        public Vertex(int number, ArrayList<Vertex> neighbors) {
             this.number = number;
-            this.neighbors = neighbors;
+            this.neighbors = new ArrayList<>();
             marked = false;
         }
 
@@ -82,13 +76,14 @@ public class Graph {
             neighbors.add(neighbor);
         }
 
-        private boolean markNeighbors(Vertex origin) {
+        private boolean markWithNeighbors(Vertex origin) {
             boolean result = true;
+            this.mark();
+
             for (Vertex v : neighbors) {
                 if (origin == null || v.number != origin.number) {
                     if (!v.marked) {
-                        v.mark();
-                        result = result & v.markNeighbors(this);
+                        result = result && v.markWithNeighbors(this);
                     } else {
                         return false;
                     }
@@ -98,7 +93,7 @@ public class Graph {
             return result;
         }
 
-        public void mark() {
+        private void mark() {
             this.marked = true;
         }
 
@@ -106,8 +101,8 @@ public class Graph {
         public String toString() {
             return "Vertex #" + this.number
                     + ". Neighbors: " + Arrays.toString(neighbors.stream()
-                                                                 .map(v -> v.number)
-                                                                 .toArray());
+                    .map(v -> v.number)
+                    .toArray());
         }
 
         @Override
