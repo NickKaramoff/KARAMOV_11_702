@@ -1,10 +1,12 @@
 # KARAMOV_11_702
 
-> Kazan Federal University, Higher School of Information Technology and
-  Information Systems, group 11-702
+> Kazan Federal University, Higher School of Information Technology and 
+> Information Systems, group 11-702
 
-### Table of contents
-#### First semester (2017)
+## Table of contents
+
+### First semester (2017)
+
 * 03.10 - [__/List__](List/src/ru/karamoff) - implementation of an expandable
   array class (`ArrayList`-like) with methods.
 * 10.10 - [__/Auto__](Auto/src/ru/karamoff) - create `Parking` and `Vehicle`
@@ -33,7 +35,8 @@
   analyze weather data and output least difference between month average and
   year average.
 
-#### Second semester (2018)
+### Second semester (2018)
+
 * 08.02 - [__/BiggerBetterNumber__](BiggerBetterNumber/src/ru/karamoff) - finds
   amount of numbers that are built from the same digits and are bigger than the
   original.
@@ -55,8 +58,15 @@
   random array using multiple `Thread`s (that's not optimal by any means).
 * 19.04 - [__/FindCars__](FindCars/src/ru/karamoff) - find the amount of cars
   that users of every specified age have.
+* 23.04 - [__/LeeAlgorithm__](LeeAlgorithm/src/ru/karamoff) - finds the shortest
+  way between two points in a maze.
+* 03.05 - [__/jcommanderloader__](jcommanderloader/) - loads compiled .class
+  files from a folder and displays its constructors, fields and methods.
+* 29.05 - [__/IsThatTree__](IsThatTree/src/ru/karamoff) - based on adjacency
+  matrix defines whether the graph is a tree (or a forest) or not.
 
-### Other
+## Other
+
 * ??? - [__/Matrixer__](Matrixer/src/ru/karamoff) - something about storing a
   big table and quickly searching through it. I don't even know if it's finished
   or not.
