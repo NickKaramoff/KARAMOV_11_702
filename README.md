@@ -66,9 +66,14 @@
   as an array or something.
 * 29.05 - [__/IsThatTree__](IsThatTree/src/ru/karamoff) - based on adjacency
   matrix defines whether the graph is a tree (or a forest) or not.
-
-## Other
-
 * ??? - [__/Matrixer__](Matrixer/src/ru/karamoff) - something about storing a
   big table and quickly searching through it. I don't even know if it's finished
   or not.
+* ??? - [__/ExpressionTree__](ExpressionTree/src/ru/karamoff) - trying to
+  implement the expression tree. Calculation is done, parsing is questionable.
+
+### Third semester (2018)
+
+* 18.09 - [__/mcdrive__](mcdrive/) - project to learn the concept of databases
+  and their connection to Java. This project simulates a system that could be
+  implemented in McDrive and/or other fastfood drive-ins.
