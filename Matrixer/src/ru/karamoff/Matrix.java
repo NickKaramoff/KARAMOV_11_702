@@ -1,6 +1,6 @@
 package ru.karamoff;
 
 public interface Matrix {
-	void set(int i, int j, int value);
-	int get(int i, int j);
+	void put(int i, int j, Number value);
+	Number get(int i, int j);
 }
