@@ -10,6 +10,6 @@ import lombok.*;
 public class Modification {
     private Integer id;
     private String name;
-    private Integer ingredientId;
+    private Ingredient ingredient;
     private Float cost;
 }

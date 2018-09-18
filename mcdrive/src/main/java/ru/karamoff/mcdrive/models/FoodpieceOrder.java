@@ -2,6 +2,8 @@ package ru.karamoff.mcdrive.models;
 
 import lombok.*;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @Builder
@@ -9,7 +11,8 @@ import lombok.*;
 @EqualsAndHashCode
 public class FoodpieceOrder {
     private Integer id;
-    private Integer foodpieceId;
-    private Integer orderId;
+    private Foodpiece foodpiece;
     private Boolean ready;
+
+    private Map<Modification, Integer> addedMods;
 }

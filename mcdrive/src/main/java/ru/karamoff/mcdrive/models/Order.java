@@ -3,6 +3,7 @@ package ru.karamoff.mcdrive.models;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +16,6 @@ public class Order {
     private LocalDateTime time;
     private Boolean paid;
     private Boolean ready;
+
+    private List<FoodpieceOrder> foodpieces;
 }
