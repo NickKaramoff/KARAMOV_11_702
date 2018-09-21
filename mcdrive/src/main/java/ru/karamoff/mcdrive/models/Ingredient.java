@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class Ingredient {
-    private Integer id;
+    private Long id;
     private String name;
     private Boolean available;
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 @ToString
 @EqualsAndHashCode
 public class FoodpieceOrder {
-    private Integer id;
+    private Long id;
     private Foodpiece foodpiece;
     private Boolean ready;
 

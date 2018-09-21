@@ -1,6 +1,6 @@
 CREATE TABLE mcdrive_foodpiece (
   --   Блюда
-  id        SERIAL PRIMARY KEY,
+  id        BIGSERIAL PRIMARY KEY,
   name      VARCHAR(50),
   cost      REAL,
   available BOOLEAN
@@ -8,7 +8,7 @@ CREATE TABLE mcdrive_foodpiece (
 
 CREATE TABLE mcdrive_ingredient (
   --   Ингредиенты
-  id        SERIAL PRIMARY KEY,
+  id        BIGSERIAL PRIMARY KEY,
   name      VARCHAR(50),
   available BOOLEAN
 );
@@ -22,7 +22,7 @@ CREATE TABLE mcdrive_ingredient_foodpiece (
 
 CREATE TABLE mcdrive_modification (
   --   Модификации (доп. котлета, сыр, etc.)
-  id            SERIAL PRIMARY KEY,
+  id            BIGSERIAL PRIMARY KEY,
   name          VARCHAR(50),
   ingredient_id INTEGER,
   extra_cost    REAL
@@ -36,7 +36,7 @@ CREATE TABLE mcdrive_modification_foodpiece (
 
 CREATE TABLE mcdrive_order (
   --   Заказ
-  id     SERIAL PRIMARY KEY,
+  id     BIGSERIAL PRIMARY KEY,
   sum    REAL,
   "time" TIMESTAMP,
   paid   BOOLEAN,
@@ -45,7 +45,7 @@ CREATE TABLE mcdrive_order (
 
 CREATE TABLE mcdrive_foodpiece_order (
   --   Какая еда в каком заказе
-  id           SERIAL PRIMARY KEY,
+  id           BIGSERIAL PRIMARY KEY,
   foodpiece_id INTEGER,
   order_id     INTEGER,
   ready        BOOLEAN

@@ -11,7 +11,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Order {
-    private Integer id;
+    private Long id;
     private Float sum;
     private LocalDateTime time;
     private Boolean paid;

@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class Modification {
-    private Integer id;
+    private Long id;
     private String name;
     private Ingredient ingredient;
     private Float cost;

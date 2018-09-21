@@ -11,7 +11,7 @@ import java.util.Map;
 @ToString
 @EqualsAndHashCode
 public class Foodpiece {
-    private Integer id;
+    private Long id;
     private String name;
     private Float cost;
     private Boolean available;
