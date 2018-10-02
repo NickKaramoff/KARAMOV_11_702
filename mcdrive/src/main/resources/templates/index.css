@@ -23,12 +23,10 @@
     background-color: #ffc107;
 }
 
-
 /* Date specifically should be of lighter color */
 .card-title#current-date {
     color: #666;
 }
-
 
 .display-4 {
     font-size: 2.8rem;
