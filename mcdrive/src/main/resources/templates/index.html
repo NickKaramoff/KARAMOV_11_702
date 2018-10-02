@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Смена - mcdrive</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+
+<body>
+    <div class="container pt-2 mb-3">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark rounded">
+            <a class="navbar-brand" href="#">mcdrive</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu-navbar"
+                aria-controls="main-menu-navbar" aria-expanded="false" aria-label="Меню">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse ml-3" id="main-menu-navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Смена <span class="sr-only">(здесь)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Журнал смен</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Отчёты</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- ORDERS LIST -->
+            <div class="col-md-8 col-lg-9 mb-3">
+                <div class="list-group">
+                    <div class="list-group-item flex-column align-items-start order">
+                        <div class="d-flex w-100 justify-content-between mb-3">
+                            <h3 class="display-4 m-0"><small>#</small>1834</h3>
+                            <p class="lead text-muted">5 минут назад</p>
+                        </div>
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="foodpieceorder">
+                                    <p class="lead mb-0">Бигмак</p>
+                                </div>
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-success">
+                                        <input type="checkbox" autocomplete="off"> Готово
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="foodpieceorder">
+                                    <p class="lead mb-0">Кока-Кола Зеро стд.</p> 
+                                    <ul class="foodpieceorder-modification"><li>Без льда</li></ul>
+                                </div>
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-success">
+                                        <input type="checkbox" autocomplete="off"> Готово
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="foodpieceorder">
+                                    <p class="lead mb-0">Картофель фри ср.</p>
+                                </div>
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-success">
+                                        <input type="checkbox" autocomplete="off"> Готово
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="foodpieceorder">
+                                    <p class="lead mb-0">Соус сырный</p>
+                                </div>
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-success">
+                                        <input type="checkbox" autocomplete="off"> Готово
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="btn-group btn-group-toggle d-flex justify-content-end" data-toggle="buttons" role="group">
+                            <label class="btn btn-lg btn-outline-success disabled">
+                                <input type="checkbox" autocomplete="off"> Готов
+                            </label>
+                            <label class="btn btn-lg btn-outline-success disabled">
+                                <input type="checkbox" autocomplete="off"> Выдан
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END ORDERS LIST -->
+
+            <!-- SIDEBAR -->
+            <div class="col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0" id="current-date"></h6>
+                        <h2 class="card-title mb-0" id="current-time"></h2>
+                    </div>
+                    <div class="card-body text-body">
+                        <p class="card-text">
+                            <strong id="worker-name">Константин</strong>,
+                            <br>
+                            ваша смена длится <nobr id="shift-time">4 часа 17 минут</nobr>.
+                        </p>
+                    </div>
+                    <ul class="show list-group list-group-flush" id="sidebar-menu">
+                        <a href="#" class="list-group-item list-group-item-action">Взять перерыв</a>
+                        <a href="#" class="list-group-item list-group-item-action hover hover-warning">Вызвать
+                            менеджера</a>
+                        <a href="#" class="list-group-item list-group-item-action hover hover-danger">Закончить смену</a>
+                        <a href="" class="list-group-item list-group-item-action disabled">Выйти из системы</a>
+                    </ul>
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+        </div>
+    </div>
+    <script>
+        setInterval(() => {
+            let date = new Date();
+
+            let timestr = ('0' + date.getHours()).slice(-2) + ':'
+                + ('0' + date.getMinutes()).slice(-2) + ':'
+                + ('0' + date.getSeconds()).slice(-2);
+
+
+            let dates = ['января', 'февраля', 'марта',
+                         'апреля', 'мая', 'июня',
+                         'июля', 'августа', 'сентября',
+                         'октября', 'ноября', 'декабря'];
+            
+            let datestr = date.getDay() + ' ' + dates[date.getMonth()];
+
+            document.getElementById('current-time').innerText = timestr;
+            document.getElementById('current-date').innerText = datestr;
+        }, 1000);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
