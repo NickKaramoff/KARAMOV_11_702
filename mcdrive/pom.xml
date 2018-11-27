@@ -7,6 +7,7 @@
     <groupId>ru.karamoff</groupId>
     <artifactId>mcdrive</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
     
     <build>
         <plugins>
@@ -19,6 +20,11 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>
@@ -28,6 +34,17 @@
             <artifactId>lombok</artifactId>
             <version>1.18.2</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.2</version>
         </dependency>
     </dependencies>
 </project>

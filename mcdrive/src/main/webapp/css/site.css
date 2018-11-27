@@ -1,4 +1,10 @@
-/* 
+.navbar .navbar-brand {
+    font-family: "Yellowtail", sans-serif;
+    font-size: 1.5rem;
+}
+
+
+/*
  * HOVER
  *
  * These elements change background and text color as well as add transition
@@ -14,18 +20,18 @@
 }
 
 .hover-danger:hover {
-    color: white;
+    color: #ffffff;
     background-color: #dc3545;
 }
 
 .hover-warning:hover {
-    color: black;
+    color: #000000;
     background-color: #ffc107;
 }
 
 /* Date specifically should be of lighter color */
 .card-title#current-date {
-    color: #666;
+    color: #666666;
 }
 
 .display-4 {
@@ -46,4 +52,21 @@
 .btn.focus {
     outline: none !important;
     box-shadow: none !important;
+}
+
+.list-group > .list-group-item > svg {
+    fill: #495057;
+    margin-right: 5px;
+}
+
+.list-group > .list-group-item.disabled > svg {
+    fill: #6c757d;
+}
+
+.list-group > .list-group-item.hover-danger:hover > svg {
+    fill: #fff;
+}
+
+.list-group > .list-group-item.hover-warning:hover > svg {
+    fill: #000;
 }
