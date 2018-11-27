@@ -77,3 +77,6 @@
 * 18.09 - [__/mcdrive__](mcdrive/) - project to learn the concept of databases
   and their connection to Java. This project simulates a system that could be
   implemented in McDrive and/or other fastfood drive-ins.
+* 27.11 - [__/basketdemo__](basketdemo/) - little project, demonstrating how a
+  shopping cart in an online store would work. Supports cookies, adding and
+  removing from cart.
