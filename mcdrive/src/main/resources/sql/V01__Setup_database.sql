@@ -1,4 +1,20 @@
-CREATE TABLE mcdrive_foodpiece (
+CREATE TABLE "user" (
+  --  Пользователь
+  id          BIGSERIAL PRIMARY KEY,
+  first_name  VARCHAR(100),
+  last_name   VARCHAR(100),
+  role        VARCHAR(8)
+);
+
+CREATE TABLE cookie (
+  --  Аутентификация
+  id          BIGSERIAL PRIMARY KEY,
+  value       CHAR(36),
+  last_visit  TIMESTAMP,
+  user_id     BIGINT
+);
+
+CREATE TABLE foodpiece (
   --   Блюда
   id        BIGSERIAL PRIMARY KEY,
   name      VARCHAR(50),
@@ -6,35 +22,35 @@ CREATE TABLE mcdrive_foodpiece (
   available BOOLEAN
 );
 
-CREATE TABLE mcdrive_ingredient (
+CREATE TABLE ingredient (
   --   Ингредиенты
   id        BIGSERIAL PRIMARY KEY,
   name      VARCHAR(50),
   available BOOLEAN
 );
 
-CREATE TABLE mcdrive_ingredient_foodpiece (
+CREATE TABLE ingredient_foodpiece (
   --   В каких блюдах какие ингредиенты
-  ingredient_id INTEGER,
-  foodpiece_id  INTEGER,
-  amount        INTEGER
+  ingredient_id BIGINT,
+  foodpiece_id  BIGINT,
+  amount        SMALLINT
 );
 
-CREATE TABLE mcdrive_modification (
+CREATE TABLE modification (
   --   Модификации (доп. котлета, сыр, etc.)
   id            BIGSERIAL PRIMARY KEY,
   name          VARCHAR(50),
-  ingredient_id INTEGER,
+  ingredient_id BIGINT,
   extra_cost    REAL
 );
 
-CREATE TABLE mcdrive_modification_foodpiece (
+CREATE TABLE modification_foodpiece (
   --   Какие модификации применимы к каким блюдам
-  foodpiece_id    INTEGER,
-  modification_id INTEGER
+  foodpiece_id    BIGINT,
+  modification_id BIGINT
 );
 
-CREATE TABLE mcdrive_order (
+CREATE TABLE "order" (
   --   Заказ
   id     BIGSERIAL PRIMARY KEY,
   sum    REAL,
@@ -43,54 +59,58 @@ CREATE TABLE mcdrive_order (
   ready  BOOLEAN
 );
 
-CREATE TABLE mcdrive_foodpiece_order (
+CREATE TABLE foodpiece_order (
   --   Какая еда в каком заказе
   id           BIGSERIAL PRIMARY KEY,
-  foodpiece_id INTEGER,
-  order_id     INTEGER,
+  foodpiece_id BIGINT,
+  order_id     BIGINT,
   ready        BOOLEAN
 );
 
-CREATE TABLE mcdrive_modification_foodpiece_order (
+CREATE TABLE modification_foodpiece_order (
   --   Какие модификацие были применены к каким блюдам в неком заказе
-  modification_id    INTEGER,
-  foodpiece_order_id INTEGER,
-  amount             INTEGER,
+  modification_id    BIGINT,
+  foodpiece_order_id BIGINT,
+  amount             SMALLINT,
   extra_cost         REAL
 );
 
-ALTER TABLE mcdrive_foodpiece_order
-  ADD FOREIGN KEY (foodpiece_id)
-REFERENCES mcdrive_foodpiece (id);
+ALTER TABLE cookie
+  ADD FOREIGN KEY (user_id)
+REFERENCES "user" (id);
 
-ALTER TABLE mcdrive_foodpiece_order
+ALTER TABLE foodpiece_order
+  ADD FOREIGN KEY (foodpiece_id)
+REFERENCES foodpiece (id);
+
+ALTER TABLE foodpiece_order
   ADD FOREIGN KEY (order_id)
-REFERENCES mcdrive_order (id);
+REFERENCES "order" (id);
 
-ALTER TABLE mcdrive_ingredient_foodpiece
+ALTER TABLE ingredient_foodpiece
   ADD FOREIGN KEY (ingredient_id)
-REFERENCES mcdrive_ingredient (id);
+REFERENCES ingredient (id);
 
-ALTER TABLE mcdrive_ingredient_foodpiece
+ALTER TABLE ingredient_foodpiece
   ADD FOREIGN KEY (foodpiece_id)
-REFERENCES mcdrive_foodpiece (id);
+REFERENCES foodpiece (id);
 
-ALTER TABLE mcdrive_modification_foodpiece_order
+ALTER TABLE modification_foodpiece_order
   ADD FOREIGN KEY (modification_id)
-REFERENCES mcdrive_modification (id);
+REFERENCES modification (id);
 
-ALTER TABLE mcdrive_modification_foodpiece_order
+ALTER TABLE modification_foodpiece_order
   ADD FOREIGN KEY (foodpiece_order_id)
-REFERENCES mcdrive_foodpiece_order (id);
+REFERENCES foodpiece_order (id);
 
-ALTER TABLE mcdrive_modification
+ALTER TABLE modification
   ADD FOREIGN KEY (ingredient_id)
-REFERENCES mcdrive_ingredient (id);
+REFERENCES ingredient (id);
 
-ALTER TABLE mcdrive_modification_foodpiece
+ALTER TABLE modification_foodpiece
   ADD FOREIGN KEY (foodpiece_id)
-REFERENCES mcdrive_foodpiece (id);
+REFERENCES foodpiece (id);
 
-ALTER TABLE mcdrive_modification_foodpiece
+ALTER TABLE modification_foodpiece
   ADD FOREIGN KEY (modification_id)
-REFERENCES mcdrive_modification (id);
+REFERENCES modification (id);

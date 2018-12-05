@@ -14,5 +14,5 @@ public class FoodpieceOrder {
     private Foodpiece foodpiece;
     private Boolean ready;
 
-    private Map<Modification, Integer> addedMods;
+    private Map<Modification, Short> addedMods;
 }
