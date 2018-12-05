@@ -103,6 +103,7 @@ public class BasketServlet extends HttpServlet {
         if (!basketFound) {
             basketUUID = basketService.createNewBasket();
             Cookie cookie = new Cookie("auth_cookie", basketUUID.toString());
+            cookie.setMaxAge(30*24*60*60);
             res.addCookie(cookie);
         }
 

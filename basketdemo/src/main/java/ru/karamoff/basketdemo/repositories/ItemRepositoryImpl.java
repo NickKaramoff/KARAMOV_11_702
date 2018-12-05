@@ -27,7 +27,6 @@ public class ItemRepositoryImpl implements ItemRepository {
             .name(rs.getString("name"))
             .price(rs.getDouble("price"))
             .amount(rs.getInt("amount"))
-            .basketUuid(UUID.fromString(rs.getString("cookie")))
             .build());
 
     @Override
