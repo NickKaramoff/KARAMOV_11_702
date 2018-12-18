@@ -29,7 +29,7 @@ class Main {
             if (tableExists()) {
                 Logger.warning(
                         "Table already exists. If you want to import new data, " +
-                                "drop or rename table 'entries'.\n",
+                                "drop or rename table 'entries'.",
                         "Preparing to perform requests...");
             } else {
                 Logger.warning("Table doesn't exist.", "Loading and processing file with log entries...");

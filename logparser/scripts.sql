@@ -30,8 +30,8 @@ FROM
   ON order_t_t.client_id=enter_t_t.client_id;
 
 -- 6. Сколько в среднем посетителей бывает за час?
-SELECT avg(orders)::NUMERIC(10,3)
-FROM (SELECT date_trunc('hour', date_time), count(url) as orders
+SELECT avg(views)::NUMERIC(10,3)
+FROM (SELECT date_trunc('hour', date_time), count(url) as views
       FROM entries
       GROUP BY date_trunc('hour', date_time)) as view_count;
 
