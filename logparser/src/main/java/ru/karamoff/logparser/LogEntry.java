@@ -9,6 +9,7 @@ import ru.karamoff.logparser.utils.ANSI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +32,7 @@ public class LogEntry {
     private int clientId;
 
 
-    static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MMM/yyyy:HH:mm:ss xxx");
+    static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MMM/yyyy:HH:mm:ss xxx", Locale.US);
     static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
     /**
