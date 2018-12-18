@@ -168,7 +168,7 @@ class Main {
         );
 
         int clientsWhoOrdered = template.queryForObject(
-                "SELECT count(*) FROM (SELECT DISTINCT client_id FROM entries WHERE url LIKE '%order%') as orders;",
+                "SELECT count(*) FROM (SELECT DISTINCT client_id FROM entries WHERE url='/order.phtml') as orders;",
                 (rs, i) -> rs.getInt("count")
         );
 
@@ -176,7 +176,7 @@ class Main {
                 "SELECT avg(orders) " +
                 "FROM " +
                     "(SELECT date_time::DATE, count(url) as orders" +
-                    " FROM entries WHERE url LIKE '%order%'" +
+                    " FROM entries WHERE url='/order.phtml'" +
                     " GROUP BY date_time::DATE) as order_count;",
                 (rs, i) -> rs.getDouble("avg")
         );
@@ -184,8 +184,9 @@ class Main {
         PGInterval[] intervals = template.queryForObject(
                 "SELECT min(order_t-enter_t), avg(order_t-enter_t), max(order_t-enter_t) " +
                 "FROM " +
-                    "(SELECT client_id, date_time as order_t" +
-                    " FROM entries WHERE url='/order.phtml') as order_t_t " +
+                    "(SELECT client_id, min(date_time) as order_t" +
+                    " FROM entries WHERE url='/order.phtml'" +
+                    " GROUP BY client_id) as order_t_t " +
                     "JOIN " +
                     "(SELECT client_id, min(date_time) as enter_t" +
                     " FROM entries GROUP BY client_id) as enter_t_t " +
@@ -223,7 +224,7 @@ class Main {
         int bestBook = template.queryForObject(
                 "SELECT split_part(url, '=', 2) as book_id, count(url) as order_count " +
                 "FROM entries " +
-                "WHERE url LIKE '%addbasket%' " +
+                "WHERE url LIKE '/addbasket%' " +
                 "GROUP BY url " +
                 "ORDER BY order_count DESC " +
                 "LIMIT 1;",
