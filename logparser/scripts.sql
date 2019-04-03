@@ -24,21 +24,26 @@ FROM
 -- 5. Сколько времени прошло с момента входа на сайт до оформления заказа, в среднем, максимум, минимум?
 SELECT min(order_t-enter_t), avg(order_t-enter_t), max(order_t-enter_t)
 FROM
-  (SELECT client_id, min(date_time) as order_t FROM entries WHERE url='/order.phtml' GROUP BY client_id) as order_t_t
+  (SELECT client_id, min(date_time) as order_t 
+   FROM entries 
+   WHERE url='/order.phtml' 
+   GROUP BY client_id) as order_t_t
   JOIN
-  (SELECT client_id, min(date_time) as enter_t FROM entries GROUP BY client_id) as enter_t_t
+  (SELECT client_id, min(date_time) as enter_t 
+   FROM entries 
+   GROUP BY client_id) as enter_t_t
   ON order_t_t.client_id=enter_t_t.client_id;
 
 -- 6. Сколько в среднем посетителей бывает за час?
 SELECT avg(views)::NUMERIC(10,3)
-FROM (SELECT date_trunc('hour', date_time), count(url) as views
+FROM (SELECT date_trunc('hour', date_time), count(DISTINCT client_id) as views
       FROM entries
       GROUP BY date_trunc('hour', date_time)) as view_count;
 
 -- 7. Какие пользователи совершили больше всего покупок?
 SELECT client_id, count(*) as item_count
 FROM
-  (SELECT client_id, url FROM entries WHERE url LIKE '/addbasket%') as purchases
+  (SELECT client_id FROM entries WHERE url LIKE '/addbasket%') as purchases
 GROUP BY client_id
 ORDER BY item_count DESC;
 
